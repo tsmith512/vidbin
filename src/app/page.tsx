@@ -5,9 +5,6 @@ import { redirect } from 'next/navigation';
 import { UploadForm } from '@/components/UploadForm';
 
 export default function Home() {
-  // @TODO: placeholder for a link to the video just uploaded
-  let newVideoId: string = '';
-
   // @TODO: Fighting with the type of this handler...
   const uploadHandler = async (event: any): Promise<void> => {
     event.preventDefault();
@@ -39,7 +36,7 @@ export default function Home() {
 
     if (result.ok) {
       alert(`Uploaded video`);
-      redirect(`/view/${newVideoId}`);
+      redirect(`/view/${data.uid}`);
     }
 
   };
