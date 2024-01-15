@@ -12,6 +12,13 @@ function App() {
       <div>
         <h2>Upload a video</h2>
         <h3>File Upload</h3>
+        <form>
+          <label>
+            <span>Title:</span>
+            <input type="text" name="title" id="titleInput" />
+            <input type="submit" name="submit" value="Upload" />
+          </label>
+        </form>
         <h3>Webcam Capture</h3>
       </div>
 
