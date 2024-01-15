@@ -40,7 +40,7 @@ export default function Home() {
 
     if (result.ok) {
       alert(`Uploaded video`);
-      redirect(`/view/${data.uid}`);
+      redirect(`/view/${data.video_id}`);
     }
   };
   return (
