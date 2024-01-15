@@ -5,12 +5,9 @@ import type { NextRequest } from 'next/server';
 export const runtime = 'edge';
 
 export async function GET(request: NextRequest) {
-  return new Response(
-    'Vidbin API root',
-    {
-      headers: {
-        'Content-Type': 'text/plain',
-      },
-    }
-  );
+  return new Response('Vidbin API root', {
+    headers: {
+      'Content-Type': 'text/plain',
+    },
+  });
 }
