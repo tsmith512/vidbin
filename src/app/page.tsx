@@ -1,93 +1,45 @@
-import Image from 'next/image';
 import styles from './page.module.css';
 
 export default function Home() {
   return (
-    <main className={styles.main}>
-      <div className={styles.description}>
-        <p>
-          Get started by editing&nbsp;
-          <code className={styles.code}>src/app/page.tsx</code>
-        </p>
-        <div>
-          <a
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{' '}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className={styles.vercelLogo}
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
-        </div>
+    <>
+      <header>
+        <h1>VidBin</h1>
+        <span>A Cloudflare Stream Demo</span>
+      </header>
+
+      <div>
+        <h2>Upload a video</h2>
+        <h3>File Upload</h3>
+        <form>
+          <label>
+            <span>Title:</span>
+            <input type="text" name="title" id="titleInput" />
+            <input type="submit" name="submit" value="Upload" />
+          </label>
+        </form>
+        <h3>Webcam Capture</h3>
       </div>
 
-      <div className={styles.center}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
+      <div>
+        <h2>View a Video</h2>
+        <h3>With a Code</h3>
+        <h3>What&rsquo;s Here Lately</h3>
       </div>
 
-      <div className={styles.grid}>
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Docs <span>-&gt;</span>
-          </h2>
-          <p>Find in-depth information about Next.js features and API.</p>
-        </a>
-
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Learn <span>-&gt;</span>
-          </h2>
-          <p>Learn about Next.js in an interactive course with&nbsp;quizzes!</p>
-        </a>
-
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Templates <span>-&gt;</span>
-          </h2>
-          <p>Explore starter templates for Next.js.</p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Deploy <span>-&gt;</span>
-          </h2>
-          <p>Instantly deploy your Next.js site to a shareable URL with Vercel.</p>
-        </a>
+      <div>
+        <h2>How does it work</h2>
+        <p>Links to how this application handles a few basic tasks to operate.</p>
+        <ul>
+          <li>Provision a direct upload URL</li>
+          <li>Generate a signed URL</li>
+        </ul>
       </div>
-    </main>
+
+      <footer>
+        &copy; {new Date().getFullYear()} &bull; Created by Taylor Smith, based on an
+        internal prototype by WHO MADE PASTE?
+      </footer>
+    </>
   );
 }
