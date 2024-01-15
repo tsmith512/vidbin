@@ -1,10 +1,12 @@
 'use client';
 
-import { redirect } from 'next/navigation';
+import { useRouter } from 'next/navigation'
 
 import { UploadForm } from '@/components/UploadForm';
 
 export default function Home() {
+  const router = useRouter();
+
   // @TODO: Fighting with the type of this handler...
   const uploadHandler = async (event: any): Promise<void> => {
     event.preventDefault();
@@ -40,7 +42,7 @@ export default function Home() {
 
     if (result.ok) {
       alert(`Uploaded video`);
-      redirect(`/view/${data.video_id}`);
+      router.push(`/view/${data.video_id}`);
     }
   };
   return (
