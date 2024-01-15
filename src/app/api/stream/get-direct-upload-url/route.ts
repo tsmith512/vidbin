@@ -30,11 +30,21 @@ export async function GET(request: NextRequest) {
     options
   );
 
-  const endpoint = response.headers.get('location');
+  const data = await response.json();
 
-  return new Response(endpoint, {
+  if (!response.ok) {
+    return new Response('error', { status: 500 });
+  }
+
+  const { uid, uploadURL } = data.result;
+
+  return new Response(JSON.stringify({
+    // This will be the Stream Video ID
+    video_id: uid,
+    // And this is our temporary URL that we should upload it to
+    endpoint: uploadURL,
+  }), {
     headers: {
-      'Access-Control-Expose-Headers': 'Location',
       'Access-Control-Allow-Headers': '*',
       'Access-Control-Allow-Origin': '*',
     },
