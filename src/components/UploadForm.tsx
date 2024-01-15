@@ -1,7 +1,8 @@
 'use client';
 
 interface uploadFormProps {
-  uploadHandler: (event) => Promise<void>;
+  // @TODO: Fix type here
+  uploadHandler: (event: any) => Promise<void>;
 }
 
 export const UploadForm = (props: uploadFormProps) => {
