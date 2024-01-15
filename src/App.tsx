@@ -1,24 +1,39 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+      <header>
+        <h1>VidBin</h1>
+        <span>A Cloudflare Stream Demo</span>
       </header>
+
+      <div>
+        <h2>Upload a video</h2>
+        <h3>File Upload</h3>
+        <h3>Webcam Capture</h3>
+      </div>
+
+      <div>
+        <h2>View a Video</h2>
+        <h3>With a Code</h3>
+        <h3>What's Here Lately</h3>
+      </div>
+
+      <div>
+        <h2>How does it work</h2>
+        <p>Links to how this application handles a few basic tasks to operate.</p>
+        <ul>
+          <li>Provision a direct upload URL</li>
+          <li>Generate a signed URL</li>
+        </ul>
+      </div>
+
+      <footer>
+        &copy; {new Date().getFullYear()} &bull; Created by Taylor Smith, based on an
+        internal prototype by WHO MADE PASTE?
+      </footer>
     </div>
   );
 }
