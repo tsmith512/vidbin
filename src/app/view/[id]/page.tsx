@@ -3,9 +3,9 @@
 export const dynamic = 'force-static';
 export const runtime = 'edge';
 
-import { Stream } from "@cloudflare/stream-react";
+import { Stream } from '@cloudflare/stream-react';
 
-export default function ViewSingle({ params }: { params: { id: string }}) {
+export default function ViewSingle({ params }: { params: { id: string } }) {
   return (
     <>
       <div>

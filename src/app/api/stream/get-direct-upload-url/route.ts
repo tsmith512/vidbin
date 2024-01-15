@@ -44,15 +44,18 @@ export async function POST(request: NextRequest) {
 
   const { uid, uploadURL } = data.result;
 
-  return new Response(JSON.stringify({
-    // This will be the Stream Video ID
-    video_id: uid,
-    // And this is our temporary URL that we should upload it to
-    endpoint: uploadURL,
-  }), {
-    headers: {
-      'Access-Control-Allow-Headers': '*',
-      'Access-Control-Allow-Origin': '*',
-    },
-  });
+  return new Response(
+    JSON.stringify({
+      // This will be the Stream Video ID
+      video_id: uid,
+      // And this is our temporary URL that we should upload it to
+      endpoint: uploadURL,
+    }),
+    {
+      headers: {
+        'Access-Control-Allow-Headers': '*',
+        'Access-Control-Allow-Origin': '*',
+      },
+    }
+  );
 }
