@@ -1,5 +1,7 @@
 'use client';
 
+export const dynamic = 'force-static';
+
 import { Stream } from "@cloudflare/stream-react";
 
 export default function ViewSingle({ params }: { params: { id: string }}) {
