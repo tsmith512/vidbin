@@ -1,6 +1,7 @@
 'use client';
 
 export const dynamic = 'force-static';
+export const runtime = 'edge';
 
 import { Stream } from "@cloudflare/stream-react";
 
