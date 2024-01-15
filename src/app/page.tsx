@@ -3,6 +3,10 @@
 import { UploadForm } from '@/components/UploadForm';
 
 export default function Home() {
+  // @TODO: placeholder for a link to the video just uploaded
+  let newVideoId: string = '';
+
+  // @TODO: Fighting with the type of this handler...
   const uploadHandler = async (event: any): Promise<void> => {
     event.preventDefault();
 
@@ -13,9 +17,29 @@ export default function Home() {
       console.log(field[1]);
     }
 
-    const endpoint = await fetch('/api/stream/get-direct-upload-url');
+    // @TODO: Check for file-size. Current request is a 200MB max basic upload URL
 
-    console.log(await endpoint.text());
+    // Query a server-side function to provision us a direct upload URL
+    const response = await fetch('/api/stream/get-direct-upload-url');
+    const data = await response.json();
+
+    console.log(data);
+
+    if (!response.ok) {
+      alert('Failed to get a direct upload URL. Aborting.');
+      return;
+    }
+
+    const result = await fetch(data.endpoint, {
+      method: 'POST',
+      body: formData,
+    });
+
+    if (result.ok) {
+      alert(`Uploaded video`)
+      newVideoId = data.uid;
+    }
+
   };
   return (
     <>
@@ -23,6 +47,9 @@ export default function Home() {
         <h2>Upload a video</h2>
         <h3>File Upload</h3>
         <UploadForm uploadHandler={uploadHandler} />
+        { newVideoId && (
+          <a href={`https://clouldflarestream.com/${newVideoId}/iframe`}>Watch {newVideoId} now</a>
+        )}
         <h3>Webcam Capture</h3>
       </div>
     </>
