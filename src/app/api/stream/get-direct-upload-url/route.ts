@@ -13,7 +13,10 @@ const tag = process.env.ACCOUNT_TAG;
  * @param request
  * @returns
  */
-export async function GET(request: NextRequest) {
+export async function POST(request: NextRequest) {
+  const input = await request.json();
+  const name = input.name || '';
+
   const options = {
     method: 'POST',
     headers: {
@@ -22,6 +25,9 @@ export async function GET(request: NextRequest) {
     body: JSON.stringify({
       creator: 'vidbin beta',
       maxDurationSeconds: 60 * 30,
+      meta: {
+        name,
+      },
     }),
   };
 

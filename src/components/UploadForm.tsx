@@ -9,8 +9,8 @@ export const UploadForm = (props: uploadFormProps) => {
   return (
     <form onSubmit={props.uploadHandler}>
       <label>
-        <span>Title:</span>
-        <input type="text" name="title" id="titleInput" />
+        <span>Name:</span>
+        <input type="text" name="name" id="nameInput" />
       </label>
       <label>
         <span>File:</span>

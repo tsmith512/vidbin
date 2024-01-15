@@ -19,7 +19,11 @@ export default function Home() {
     // @TODO: Check for file-size. Current request is a 200MB max basic upload URL
 
     // Query a server-side function to provision us a direct upload URL
-    const response = await fetch('/api/stream/get-direct-upload-url');
+    const response = await fetch('/api/stream/get-direct-upload-url', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ name: formData.get('name') }),
+    });
     const data = await response.json();
 
     console.log(data);
@@ -38,7 +42,6 @@ export default function Home() {
       alert(`Uploaded video`);
       redirect(`/view/${data.uid}`);
     }
-
   };
   return (
     <>
