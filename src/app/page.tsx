@@ -3,7 +3,7 @@
 import { UploadForm } from '@/components/UploadForm';
 
 export default function Home() {
-  const uploadHandler = async (event): Promise<void> => {
+  const uploadHandler = async (event: any): Promise<void> => {
     event.preventDefault();
 
     const formData = new FormData(event.target);
