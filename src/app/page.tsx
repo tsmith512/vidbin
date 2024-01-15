@@ -1,5 +1,7 @@
 'use client';
 
+import { redirect } from 'next/navigation';
+
 import { UploadForm } from '@/components/UploadForm';
 
 export default function Home() {
@@ -36,8 +38,8 @@ export default function Home() {
     });
 
     if (result.ok) {
-      alert(`Uploaded video`)
-      newVideoId = data.uid;
+      alert(`Uploaded video`);
+      redirect(`/view/${newVideoId}`);
     }
 
   };
@@ -47,9 +49,6 @@ export default function Home() {
         <h2>Upload a video</h2>
         <h3>File Upload</h3>
         <UploadForm uploadHandler={uploadHandler} />
-        { newVideoId && (
-          <a href={`https://clouldflarestream.com/${newVideoId}/iframe`}>Watch {newVideoId} now</a>
-        )}
         <h3>Webcam Capture</h3>
       </div>
     </>
