@@ -4,29 +4,26 @@ import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 
 import { UploadForm } from '@/components/UploadForm';
+import { WebcamForm } from '@/components/WebcamForm';
+
+interface uploadHandlerProps {
+  name: string,
+  file: Blob | File,
+}
 
 export default function Home() {
   const router = useRouter();
   const [uploading, setUploading] = useState(false);
 
   // @TODO: Fighting with the type of this handler...
-  const uploadHandler = async (event: any): Promise<void> => {
-    event.preventDefault();
-
-    const formData = new FormData(event.target);
-
-    for (const field of formData.entries()) {
-      console.log('Field: ' + field[0]);
-      console.log(field[1]);
-    }
-
+  const uploadHandler = async (input: uploadHandlerProps): Promise<void> => {
     // @TODO: Check for file-size. Current request is a 200MB max basic upload URL
 
     // Query a server-side function to provision us a direct upload URL
     const response = await fetch('/api/stream/get-direct-upload-url', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ name: formData.get('name') }),
+      body: JSON.stringify({ name: input.name }),
     });
     const data = await response.json();
 
@@ -37,11 +34,13 @@ export default function Home() {
       return;
     }
 
-
+    const submission = new FormData();
+    submission.append('name', input.name);
+    submission.append('file', input.file);
 
     const result = await fetch(data.endpoint, {
       method: 'POST',
-      body: formData,
+      body: submission,
     });
 
     if (result.ok) {
@@ -53,9 +52,10 @@ export default function Home() {
       <div>
         <h2>Upload a video</h2>
         <h3>File Upload</h3>
-        { uploading || (<UploadForm uploadHandler={uploadHandler} />) }
-        { uploading && ("Uploading...") }
+        {uploading || <UploadForm uploadHandler={uploadHandler} />}
+        {uploading && 'Uploading...'}
         <h3>Webcam Capture</h3>
+        <WebcamForm uploadHandler={uploadHandler} />
       </div>
     </>
   );

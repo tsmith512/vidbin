@@ -8,11 +8,11 @@ import { useState, useEffect, useRef } from 'react';
 import { Stream } from '@cloudflare/stream-react';
 
 interface videoInfoProps {
-  video_id: string,
-  status: string,
-  name: string,
-  duration: string,
-  created: string,
+  video_id: string;
+  status: string;
+  name: string;
+  duration: string;
+  created: string;
 }
 
 export default function ViewSingle({ params }: { params: { id: string } }) {
@@ -56,7 +56,9 @@ export default function ViewSingle({ params }: { params: { id: string } }) {
       stopPolling();
     }
 
-    return () => { stopPolling(); }
+    return () => {
+      stopPolling();
+    };
   }, [areWePolling]);
 
   return (
@@ -65,8 +67,9 @@ export default function ViewSingle({ params }: { params: { id: string } }) {
         <h2>View a Video</h2>
         <h3>With a Code</h3>
         <input type="text" disabled value={params.id} />
-        { videoInfo?.status !== 'ready' && (`Waiting for video to be ready. Currently ${videoInfo?.status || 'waiting'}.`) }
-        { videoInfo?.status === 'ready' && (<Stream controls src={params.id} />) }
+        {videoInfo?.status !== 'ready' &&
+          `Waiting for video to be ready. Currently ${videoInfo?.status || 'waiting'}.`}
+        {videoInfo?.status === 'ready' && <Stream controls src={params.id} />}
       </div>
     </>
   );
