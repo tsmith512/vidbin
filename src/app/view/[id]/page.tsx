@@ -42,6 +42,7 @@ export default function ViewSingle({ params }: { params: { id: string } }) {
     };
 
     const startPolling = () => {
+      pollVideoInfo();
       pollingRef.current = setInterval(pollVideoInfo, 5000);
     };
 
@@ -64,7 +65,7 @@ export default function ViewSingle({ params }: { params: { id: string } }) {
         <h2>View a Video</h2>
         <h3>With a Code</h3>
         <input type="text" disabled value={params.id} />
-        { videoInfo?.status !== 'ready' && ('Waiting for video to be ready...') }
+        { videoInfo?.status !== 'ready' && (`Waiting for video to be ready. Currently ${videoInfo?.status || 'waiting'}.`) }
         { videoInfo?.status === 'ready' && (<Stream controls src={params.id} />) }
       </div>
     </>

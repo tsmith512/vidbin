@@ -1,11 +1,13 @@
 'use client';
 
 import { useRouter } from 'next/navigation';
+import { useState } from 'react';
 
 import { UploadForm } from '@/components/UploadForm';
 
 export default function Home() {
   const router = useRouter();
+  const [uploading, setUploading] = useState(false);
 
   // @TODO: Fighting with the type of this handler...
   const uploadHandler = async (event: any): Promise<void> => {
@@ -28,12 +30,14 @@ export default function Home() {
     });
     const data = await response.json();
 
-    console.log(data);
+    setUploading(true);
 
     if (!response.ok) {
       alert('Failed to get a direct upload URL. Aborting.');
       return;
     }
+
+
 
     const result = await fetch(data.endpoint, {
       method: 'POST',
@@ -41,7 +45,6 @@ export default function Home() {
     });
 
     if (result.ok) {
-      alert(`Uploaded video`);
       router.push(`/view/${data.video_id}`);
     }
   };
@@ -50,7 +53,8 @@ export default function Home() {
       <div>
         <h2>Upload a video</h2>
         <h3>File Upload</h3>
-        <UploadForm uploadHandler={uploadHandler} />
+        { uploading || (<UploadForm uploadHandler={uploadHandler} />) }
+        { uploading && ("Uploading...") }
         <h3>Webcam Capture</h3>
       </div>
     </>
