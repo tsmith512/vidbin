@@ -7,13 +7,13 @@ import { UploadForm } from '@/components/UploadForm';
 import { WebcamForm } from '@/components/WebcamForm';
 
 interface uploadHandlerProps {
-  name: string,
-  file: Blob | File,
+  name: string;
+  file: Blob | File;
 }
 
 enum sources {
   file = 'file',
-  webcam = 'webcam'
+  webcam = 'webcam',
 }
 
 export default function Home() {
@@ -54,17 +54,33 @@ export default function Home() {
 
   const inputStage = () => (
     <>
-      <h3><button onClick={() => {setInputSource(sources.file)}}>File Upload</button></h3>
-      { inputSource === sources.file && <UploadForm uploadHandler={uploadHandler} /> }
-      <h3><button onClick={() => {setInputSource(sources.webcam)}}>Webcam Capture</button></h3>
-      { inputSource === sources.webcam && <WebcamForm uploadHandler={uploadHandler} /> }
+      <h3>
+        <button
+          onClick={() => {
+            setInputSource(sources.file);
+          }}
+        >
+          File Upload
+        </button>
+      </h3>
+      {inputSource === sources.file && <UploadForm uploadHandler={uploadHandler} />}
+      <h3>
+        <button
+          onClick={() => {
+            setInputSource(sources.webcam);
+          }}
+        >
+          Webcam Capture
+        </button>
+      </h3>
+      {inputSource === sources.webcam && <WebcamForm uploadHandler={uploadHandler} />}
     </>
   );
 
   return (
     <>
       <h2>Upload a video</h2>
-      { uploading ? 'Uploading' : inputStage() }
+      {uploading ? 'Uploading' : inputStage()}
     </>
   );
 }

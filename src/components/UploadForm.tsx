@@ -18,7 +18,7 @@ export const UploadForm = (props: uploadFormProps) => {
       name: nameField.current?.value || '',
       file: fileField.current?.files || undefined,
     });
-  }
+  };
   return (
     <form onSubmit={props.uploadHandler}>
       <label>

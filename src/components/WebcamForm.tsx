@@ -33,8 +33,9 @@ export const WebcamForm = (props: webcamFormProps) => {
       recorder.current = new MediaRecorder(stream.current);
 
       recorder.current.ondataavailable = (e) => {
-        console.log('adding chunk');
-        dataBuffer.current.push(e.data);
+        if (dataBuffer.current) {
+          dataBuffer.current.push(e.data);
+        }
       };
 
       recorder.current.start();
@@ -42,7 +43,7 @@ export const WebcamForm = (props: webcamFormProps) => {
       recorder.current.onstop = (e) => {
         const data = dataBuffer.current || [];
         if (data?.length > 0 && webcamPreview.current) {
-          const recording = new Blob(data, { type: "video/webm" });
+          const recording = new Blob(data, { type: 'video/webm' });
           setFile(recording);
           webcamPreview.current.srcObject = null;
           webcamPreview.current.src = URL.createObjectURL(recording);
@@ -50,7 +51,6 @@ export const WebcamForm = (props: webcamFormProps) => {
         }
       };
     }
-
   };
 
   const stopRecording = (e: React.MouseEvent) => {
@@ -71,7 +71,7 @@ export const WebcamForm = (props: webcamFormProps) => {
       webcamPreview.current.srcObject = stream.current;
       webcamPreview.current.controls = false;
     }
-  }
+  };
 
   // On initial component render, start the preview
   useEffect(() => {
@@ -86,7 +86,9 @@ export const WebcamForm = (props: webcamFormProps) => {
       }
 
       if (stream.current) {
-        stream.current.getTracks().forEach(t => { t.stop(); });
+        stream.current.getTracks().forEach((t) => {
+          t.stop();
+        });
         stream.current = null;
       }
     };
@@ -99,7 +101,7 @@ export const WebcamForm = (props: webcamFormProps) => {
       name: nameField.current?.value || '',
       file,
     });
-  }
+  };
 
   return (
     <form onSubmit={uploadPrep}>
@@ -113,9 +115,13 @@ export const WebcamForm = (props: webcamFormProps) => {
       </label>
       <label>
         <span>File:</span>
-        <button onClick={startRecording} disabled={recording}>Record</button>
-        <button onClick={stopRecording} disabled={!recording}>Stop</button>
-        <video ref={webcamPreview} autoPlay muted loop style={{ maxWidth: "100%" }} />
+        <button onClick={startRecording} disabled={recording}>
+          Record
+        </button>
+        <button onClick={stopRecording} disabled={!recording}>
+          Stop
+        </button>
+        <video ref={webcamPreview} autoPlay muted loop style={{ maxWidth: '100%' }} />
       </label>
       <div>
         <input type="submit" name="submit" value="Upload" />

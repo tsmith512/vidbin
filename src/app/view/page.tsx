@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useRef } from "react";
+import React, { useRef } from 'react';
 import { useRouter } from 'next/navigation';
 
 export default function View() {
@@ -13,7 +13,7 @@ export default function View() {
     if (idField.current) {
       router.push(`/view/${idField.current.value}`);
     }
-  }
+  };
   return (
     <>
       <div>
