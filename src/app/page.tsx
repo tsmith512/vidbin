@@ -11,13 +11,19 @@ interface uploadHandlerProps {
   file: Blob | File,
 }
 
+enum sources {
+  file = 'file',
+  webcam = 'webcam'
+}
+
 export default function Home() {
   const router = useRouter();
   const [uploading, setUploading] = useState(false);
+  const [inputSource, setInputSource] = useState<sources>(sources.file);
 
-  // @TODO: Fighting with the type of this handler...
   const uploadHandler = async (input: uploadHandlerProps): Promise<void> => {
     // @TODO: Check for file-size. Current request is a 200MB max basic upload URL
+    setUploading(true);
 
     // Query a server-side function to provision us a direct upload URL
     const response = await fetch('/api/stream/get-direct-upload-url', {
@@ -26,8 +32,6 @@ export default function Home() {
       body: JSON.stringify({ name: input.name }),
     });
     const data = await response.json();
-
-    setUploading(true);
 
     if (!response.ok) {
       alert('Failed to get a direct upload URL. Aborting.');
@@ -47,16 +51,20 @@ export default function Home() {
       router.push(`/view/${data.video_id}`);
     }
   };
+
+  const inputStage = () => (
+    <>
+      <h3><button onClick={() => {setInputSource(sources.file)}}>File Upload</button></h3>
+      { inputSource === sources.file && <UploadForm uploadHandler={uploadHandler} /> }
+      <h3><button onClick={() => {setInputSource(sources.webcam)}}>Webcam Capture</button></h3>
+      { inputSource === sources.webcam && <WebcamForm uploadHandler={uploadHandler} /> }
+    </>
+  );
+
   return (
     <>
-      <div>
-        <h2>Upload a video</h2>
-        <h3>File Upload</h3>
-        {uploading || <UploadForm uploadHandler={uploadHandler} />}
-        {uploading && 'Uploading...'}
-        <h3>Webcam Capture</h3>
-        <WebcamForm uploadHandler={uploadHandler} />
-      </div>
+      <h2>Upload a video</h2>
+      { uploading ? 'Uploading' : inputStage() }
     </>
   );
 }

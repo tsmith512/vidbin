@@ -76,6 +76,20 @@ export const WebcamForm = (props: webcamFormProps) => {
   // On initial component render, start the preview
   useEffect(() => {
     setupLivePreview();
+
+    // And if this component unmounts (switching to file input or uploading)
+    // turn off the preview stream and camera.
+    // @TODO: ...but my computer's webcam light stays on...
+    return () => {
+      if (recorder.current) {
+        recorder.current.stop();
+      }
+
+      if (stream.current) {
+        stream.current.getTracks().forEach(t => { t.stop(); });
+        stream.current = null;
+      }
+    };
   }, []);
 
   const uploadPrep = (e: React.FormEvent) => {
