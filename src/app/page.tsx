@@ -59,6 +59,7 @@ export default function Home() {
           onClick={() => {
             setInputSource(sources.file);
           }}
+          className={ inputSource === sources.file ? 'icon icon-down-arrow' : 'icon icon-right-arrow' }
         >
           File Upload
         </button>
@@ -69,6 +70,7 @@ export default function Home() {
           onClick={() => {
             setInputSource(sources.webcam);
           }}
+          className={ inputSource === sources.webcam ? 'icon icon-down-arrow' : 'icon icon-right-arrow' }
         >
           Webcam Capture
         </button>

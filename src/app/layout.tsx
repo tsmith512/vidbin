@@ -1,6 +1,7 @@
 import Nav from '../components/Nav';
 import type { Metadata } from 'next';
 
+import '../../node_modules/normalize.css/normalize.css';
 import './globals.css';
 
 export const metadata: Metadata = {
@@ -12,7 +13,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en">
       <body>
-        <div className="conatiner">
+        <div className="container">
           <header>
             <h1>VidBin</h1>
             <span>A Cloudflare Stream Demo</span>
