@@ -110,11 +110,7 @@ export const WebcamForm = (props: webcamFormProps) => {
         <input ref={nameField} type="text" name="name" id="nameInput" />
       </label>
       <label>
-        <span>File:</span>
-        <input type="file" name="file" id="fileInput" />
-      </label>
-      <label>
-        <span>File:</span>
+        <span>Recording:</span>
         <button onClick={startRecording} disabled={recording}>
           Record
         </button>
