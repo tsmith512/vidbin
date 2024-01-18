@@ -1,3 +1,8 @@
+@import 'variables';
+
+@import '../../node_modules/spectre.css/src/spectre.scss';
+@import '../../node_modules/spectre.css/src/spectre-icons.scss';
+
 html, body {
   min-height: 100vh;
   padding: 0;
@@ -8,10 +13,16 @@ html, body {
 
   display: flex;
   flex-direction: column;
+  padding: 0;
 }
 
 section, main {
   margin-bottom: 1rem;
+}
+
+nav {
+  text-transform: uppercase;
+  letter-spacing: 2px;
 }
 
 main {
@@ -20,30 +31,34 @@ main {
 
   display: flex;
   flex-direction: column;
+
+  padding: 0 1rem;
 }
 
 footer {
-  padding: 0.5rem 0 1rem;
+  padding: 0.5rem 1rem 1rem;
   font-size: 0.625rem;
   color: #999;
 }
 
 .hero {
   padding: 1rem 1rem;
+  color: $primary-color;
 }
 
 .video-buttons {
   display: flex;
   flex-direction: column;
   justify-content: center;
-}
 
-/* How the did I not realize this was a desktop-first framework... */
-@media (max-width: 840px) {
-  .video-buttons {
-    flex-direction: row;
+  /* How the did I not realize this was a desktop-first framework... */
+  @media (max-width: 840px) {
+    & {
+      flex-direction: row;
+    }
   }
 }
+
 
 .video-buttons button {
   display: block;

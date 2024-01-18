@@ -1,10 +1,7 @@
 import Nav from '../components/Nav';
 import type { Metadata } from 'next';
 
-import '../../node_modules/spectre.css/dist/spectre.min.css';
-import '../../node_modules/spectre.css/dist/spectre-exp.min.css';
-import '../../node_modules/spectre.css/dist/spectre-icons.min.css';
-import './globals.css';
+import '../styles/main.scss';
 
 export const metadata: Metadata = {
   title: 'VidBin',
