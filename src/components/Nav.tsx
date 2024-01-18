@@ -23,12 +23,10 @@ export default function Nav() {
 
   return (
     <nav>
-      <ul className='tab tab-block'>
+      <ul className="tab tab-block">
         {nav.map((l, i) => (
           <li key={i} className={pathname === l.url ? 'tab-item active' : 'tab-item'}>
-            <Link href={l.url}>
-              {l.title}
-            </Link>
+            <Link href={l.url}>{l.title}</Link>
           </li>
         ))}
       </ul>

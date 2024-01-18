@@ -18,24 +18,30 @@ export default function View() {
     <>
       <h2>View a Video</h2>
       <div className="accordion">
-        <input type="radio" name='viewSource' id='codeInput' hidden />
-        <label className='accordion-header' htmlFor="codeInput">
-          <i className='icon icon-arrow-right mr-1'></i>
+        <input type="radio" name="viewSource" id="codeInput" hidden />
+        <label className="accordion-header" htmlFor="codeInput">
+          <i className="icon icon-arrow-right mr-1"></i>
           With a Code
         </label>
         <div className="accordion-body">
           <form onSubmit={gotoVideo}>
             <div className="input-group">
-              <input className='form-input' type="text" ref={idField} />
-              <button className='btn btn-primary input-group-btn' type='submit' name='submit'>Watch</button>
+              <input className="form-input" type="text" ref={idField} />
+              <button
+                className="btn btn-primary input-group-btn"
+                type="submit"
+                name="submit"
+              >
+                Watch
+              </button>
             </div>
           </form>
         </div>
       </div>
       <div className="accordion">
-        <input type="radio" name='viewSource' id='recentInput' hidden />
-        <label className='accordion-header' htmlFor="recentInput">
-          <i className='icon icon-arrow-right mr-1'></i>
+        <input type="radio" name="viewSource" id="recentInput" hidden />
+        <label className="accordion-header" htmlFor="recentInput">
+          <i className="icon icon-arrow-right mr-1"></i>
           Recent Uploads
         </label>
         <div className="accordion-body">

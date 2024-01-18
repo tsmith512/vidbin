@@ -65,8 +65,9 @@ export default function ViewSingle({ params }: { params: { id: string } }) {
     <div className="empty">
       <div className="loading loading-lg"></div>
       <p className="empty-title h5">
-        {videoInfo?.status && `Waiting for video to be ready. Currently ${videoInfo.status}.` }
-        {videoInfo?.status === null && `Loading...` }
+        {videoInfo?.status &&
+          `Waiting for video to be ready. Currently ${videoInfo.status}.`}
+        {videoInfo?.status === null && `Loading...`}
       </p>
     </div>
   );

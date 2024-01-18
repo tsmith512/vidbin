@@ -16,7 +16,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="en">
       <body>
         <div className="container">
-          <header className='hero bg-gray'>
+          <header className="hero bg-gray">
             <div className="hero-body text-center">
               <h1>VidBin</h1>
               <p>A Cloudflare Stream Demo</p>

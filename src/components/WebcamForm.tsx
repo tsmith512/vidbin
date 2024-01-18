@@ -106,27 +106,43 @@ export const WebcamForm = (props: webcamFormProps) => {
   return (
     <form onSubmit={uploadPrep}>
       <div className="form-group">
-        <label htmlFor='nameInput' className='form-label'>Name</label>
-        <input ref={nameField} className='form-input' type="text" name="name" id="nameInput" />
+        <label htmlFor="nameInput" className="form-label">
+          Name
+        </label>
+        <input
+          ref={nameField}
+          className="form-input"
+          type="text"
+          name="name"
+          id="nameInput"
+        />
       </div>
       <div className="form-group">
-        <label className='form-label'>Recording:</label>
+        <label className="form-label">Recording:</label>
         <div className="columns">
           <div className="column col-6 col-md-12 text-center video-buttons">
-            <button className='btn btn-secondary' onClick={startRecording} disabled={recording}>
+            <button
+              className="btn btn-secondary"
+              onClick={startRecording}
+              disabled={recording}
+            >
               Record
             </button>
-            <button className='btn btn-secondary' onClick={stopRecording} disabled={!recording}>
+            <button
+              className="btn btn-secondary"
+              onClick={stopRecording}
+              disabled={!recording}
+            >
               Stop
             </button>
           </div>
           <div className="column col-6 col-md-12">
-            <video ref={webcamPreview} autoPlay muted loop className='video-preview' />
+            <video ref={webcamPreview} autoPlay muted loop className="video-preview" />
           </div>
         </div>
       </div>
-      <div className='form-group text-center'>
-        <button type="submit" name="submit" className='btn btn-primary'>
+      <div className="form-group text-center">
+        <button type="submit" name="submit" className="btn btn-primary">
           <i class="icon icon-upload"></i> Upload
         </button>
       </div>
