@@ -17,9 +17,9 @@
   "dependencies": {
     "@cloudflare/stream-react": "^1.9.1",
     "next": "14.0.4",
-    "normalize.css": "^8.0.1",
     "react": "^18",
-    "react-dom": "^18"
+    "react-dom": "^18",
+    "spectre.css": "^0.5.9"
   },
   "devDependencies": {
     "@cloudflare/next-on-pages": "^1.8.5",

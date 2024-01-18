@@ -61,16 +61,25 @@ export default function ViewSingle({ params }: { params: { id: string } }) {
     };
   }, [areWePolling]);
 
+  const waiting = () => (
+    <div className="empty">
+      <div className="loading loading-lg"></div>
+      <p className="empty-title h5">
+        {videoInfo?.status && `Waiting for video to be ready. Currently ${videoInfo.status}.` }
+        {videoInfo?.status === null && `Loading...` }
+      </p>
+    </div>
+  );
+
   return (
     <>
-      <div>
-        <h2>View a Video</h2>
-        <h3>With a Code</h3>
-        <input type="text" disabled value={params.id} />
-        {videoInfo?.status !== 'ready' &&
-          `Waiting for video to be ready. Currently ${videoInfo?.status || 'waiting'}.`}
-        {videoInfo?.status === 'ready' && <Stream controls src={params.id} />}
-      </div>
+      <h2>View a Video</h2>
+      {videoInfo?.status !== 'ready' && waiting()}
+      {videoInfo?.status === 'ready' && (
+        <div className="player-container">
+          <Stream controls responsive={false} src={params.id} />
+        </div>
+      )}
     </>
   );
 }

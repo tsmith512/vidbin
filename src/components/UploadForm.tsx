@@ -21,16 +21,18 @@ export const UploadForm = (props: uploadFormProps) => {
   };
   return (
     <form onSubmit={props.uploadHandler}>
-      <label>
-        <span>Name:</span>
-        <input ref={nameField} type="text" name="name" id="nameInput" />
-      </label>
-      <label>
-        <span>File:</span>
-        <input ref={fileField} type="file" name="file" id="fileInput" />
-      </label>
-      <div>
-        <input type="submit" name="submit" value="Upload" />
+      <div className="form-group">
+        <label className='form-label' htmlFor='nameInput'>Name</label>
+        <input ref={nameField} className='form-input' type="text" name="name" id="nameInput" />
+      </div>
+      <div className="form-group">
+        <label className='form-label' htmlFor='fileInput'>File</label>
+        <input ref={fileField} className='form-input' type="file" name="file" id="fileInput" />
+      </div>
+      <div className='form-group text-center'>
+        <button type="submit" name="submit" className='btn btn-primary'>
+          <i class="icon icon-upload"></i> Upload
+        </button>
       </div>
     </form>
   );
