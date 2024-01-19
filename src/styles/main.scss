@@ -3,7 +3,8 @@
 @import '../../node_modules/spectre.css/src/spectre.scss';
 @import '../../node_modules/spectre.css/src/spectre-icons.scss';
 
-html, body {
+html,
+body {
   min-height: 100vh;
   padding: 0;
 }
@@ -16,7 +17,8 @@ html, body {
   padding: 0;
 }
 
-section, main {
+section,
+main {
   margin-bottom: 1rem;
 }
 
@@ -58,7 +60,6 @@ footer {
     }
   }
 }
-
 
 .video-buttons button {
   display: block;
