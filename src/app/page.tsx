@@ -54,33 +54,54 @@ export default function Home() {
 
   const inputStage = () => (
     <>
-      <h3>
-        <button
-          onClick={() => {
-            setInputSource(sources.file);
-          }}
-        >
+      <div className="accordion">
+        <input
+          onClick={() => setInputSource(sources.file)}
+          type="radio"
+          id="fileSource"
+          name="inputSource"
+          hidden
+        />
+        <label className="accordion-header" htmlFor="fileSource">
+          <i className="icon icon-arrow-right mr-1"></i>
           File Upload
-        </button>
-      </h3>
-      {inputSource === sources.file && <UploadForm uploadHandler={uploadHandler} />}
-      <h3>
-        <button
-          onClick={() => {
-            setInputSource(sources.webcam);
-          }}
-        >
-          Webcam Capture
-        </button>
-      </h3>
-      {inputSource === sources.webcam && <WebcamForm uploadHandler={uploadHandler} />}
+        </label>
+        <div className="accordion-body">
+          {inputSource === sources.file && <UploadForm uploadHandler={uploadHandler} />}
+        </div>
+      </div>
+      <div className="accordion">
+        <input
+          onClick={() => setInputSource(sources.webcam)}
+          type="radio"
+          id="webcamSource"
+          name="inputSource"
+          hidden
+        />
+        <label className="accordion-header" htmlFor="webcamSource">
+          <i className="icon icon-arrow-right mr-1"></i>
+          Webcam Recording
+        </label>
+        <div className="accordion-body">
+          {inputSource === sources.webcam && <WebcamForm uploadHandler={uploadHandler} />}
+        </div>
+      </div>
+    </>
+  );
+
+  const uploadingStage = () => (
+    <>
+      <div className="empty" style={{ backgroundColor: 'transparent' }}>
+        <div className="loading loading-lg"></div>
+        <p className="empty-title h5">Uploading...</p>
+      </div>
     </>
   );
 
   return (
     <>
       <h2>Upload a video</h2>
-      {uploading ? 'Uploading' : inputStage()}
+      {uploading ? uploadingStage() : inputStage()}
     </>
   );
 }
