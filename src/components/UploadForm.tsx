@@ -47,7 +47,7 @@ export const UploadForm = (props: uploadFormProps) => {
       </div>
       <div className="form-group text-center">
         <button type="submit" name="submit" className="btn btn-primary">
-          <i class="icon icon-upload"></i> Upload
+          <i className="icon icon-upload"></i> Upload
         </button>
       </div>
     </form>

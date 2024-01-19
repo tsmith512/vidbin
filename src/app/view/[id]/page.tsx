@@ -21,9 +21,8 @@ export default function ViewSingle({ params }: { params: { id: string } }) {
   const [areWePolling, setAreWePolling] = useState(true);
 
   useEffect(() => {
-    console.log('use effect running');
     const pollVideoInfo = async () => {
-      console.log('polling!');
+      console.log('Polling for video information');
       const response = await fetch(`/api/stream/get-video-info`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -36,7 +35,7 @@ export default function ViewSingle({ params }: { params: { id: string } }) {
 
       console.log(data);
       if (data.status === 'ready') {
-        console.log('ending the poll');
+        console.log('Video is ready, ending poll');
         setAreWePolling(false);
       }
     };
@@ -59,7 +58,8 @@ export default function ViewSingle({ params }: { params: { id: string } }) {
     return () => {
       stopPolling();
     };
-  }, [areWePolling]);
+  }, [areWePolling, params.id]);
+  // ^^ params.id won't change, but eslint was mad about the missing dependency
 
   const waiting = () => (
     <div className="empty">
