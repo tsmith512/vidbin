@@ -52,7 +52,8 @@ export default function Home() {
     });
 
     if (result.ok) {
-      router.push(`/view/${data.video_id}`);
+      const newVidbin = await result.json();
+      router.push(`/view/${newVidbin.id}`);
     }
   };
 

@@ -69,9 +69,19 @@ export async function POST(request: NextRequest) {
   `).bind(              uid,      uploadURL, name, date.toISOString(), 'reserved', scheduledDeletion)
   .run();
 
+  if (!success) {
+    return new Response('Failed to create VidBin record.', {status: 500});
+  }
+
+  const id = await process.env.DB.prepare(`SELECT id FROM videos WHERE video_id = ?`).bind(uid).first('id');
+
   return new Response(
     JSON.stringify({
+      // This is our VidBin ID
+      id,
+
       // This will be the Stream Video ID
+
       video_id: uid,
       // And this is our temporary URL that we should upload it to
       endpoint: uploadURL,
