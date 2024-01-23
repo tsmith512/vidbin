@@ -13,7 +13,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="en">
       <body>
         <div className="container">
-          <header className="hero bg-gray">
+          <header className="hero">
             <div className="hero-body text-center">
               <h1>VidBin</h1>
               <p>A Cloudflare Stream Demo</p>
@@ -25,7 +25,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <main>{children}</main>
           <footer>
             &copy; {new Date().getFullYear()} &bull; Created by Taylor Smith, based on an
-            internal prototype by WHO MADE PASTE?
+            internal prototype called Paste.Video 🧡
           </footer>
         </div>
       </body>
