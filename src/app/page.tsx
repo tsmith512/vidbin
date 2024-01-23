@@ -40,7 +40,11 @@ export default function Home() {
 
     const submission = new FormData();
     submission.append('name', input.name);
-    submission.append('file', input.file);
+
+    // We create a new File() here because we want to set the name of it to the
+    // value in the form field. Otherwise it'll get its filename (from file) or
+    // be called "blob" if it came from the webcam recorder.
+    submission.append('file', new File([input.file], input.name, {type: input.file.type}));
 
     const result = await fetch(data.endpoint, {
       method: 'POST',

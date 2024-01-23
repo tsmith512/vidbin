@@ -30,11 +30,14 @@ export async function POST(request: NextRequest) {
       creator: 'vidbin beta',
       maxDurationSeconds: 60 * 30,
       scheduledDeletion: deletionDate,
+
+      // QUESTION FOR THE TEAM: None of these get set. I'm trying to pre-set the
+      // name of the video as it appears in the Dash UI.
       name: 'name in body',
       filename: 'filename in body',
       meta: {
-        name: 'name in meta',
-        filename: 'filename in meta',
+        name: 'name in meta', // This seems to get replaced by the upload call
+        filename: 'filename in meta', // This gets saved, but isn't what we use
       },
     }),
   };
