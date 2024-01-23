@@ -31,7 +31,7 @@ export default function View() {
     const then = new Date(input);
     const now = new Date();
 
-    const hours = Math.ceil((now - then) / 1000 / 60 / 60);
+    const hours = Math.ceil((now.getTime() - then.getTime()) / 1000 / 60 / 60);
 
     if (hours < 48) {
       return `${hours}hr`;
