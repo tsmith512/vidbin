@@ -14,9 +14,19 @@ export const UploadForm = (props: uploadFormProps) => {
   const uploadPrep = (e: React.FormEvent) => {
     e.preventDefault();
 
+    let targetFile = false as File | false;
+    if (fileField.current?.files?.length) {
+      targetFile = fileField.current.files[0];
+    }
+
+    if (!targetFile) {
+      alert('No file selected.');
+      return;
+    }
+
     props.uploadHandler({
       name: nameField.current?.value || '',
-      file: fileField.current?.files || undefined,
+      file: targetFile || undefined,
     });
   };
   return (
