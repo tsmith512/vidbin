@@ -31,28 +31,36 @@ export default function Home() {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ name: input.name }),
     });
-    const data = await response.json();
 
     if (!response.ok) {
       alert('Failed to get a direct upload URL. Aborting.');
       return;
     }
 
+    // Get our endpoint from the VidBin API response:
+    const data = await response.json();
+    console.log(`Received direct upload URL: ${data.endpoint}`)
+
+    // Build a FormData to submit on:
     const submission = new FormData();
     submission.append('name', input.name);
 
     // We create a new File() here because we want to set the name of it to the
-    // value in the form field. Otherwise it'll get its filename (from file) or
-    // be called "blob" if it came from the webcam recorder.
+    // value in the form field. Otherwise it'll use the filename or be called
+    // "blob" if it came from the webcam recorder.
     submission.append(
       'file',
       new File([input.file], input.name, { type: input.file.type })
     );
 
+    console.log(submission);
+
     const result = await fetch(data.endpoint, {
       method: 'POST',
       body: submission,
     });
+
+    console.log(result);
 
     // Watch out! We're looking for an `ok` from the Stream Direct Upload endpoint
     // but using the VidBin API's response (`data`) for the ID of the new page.

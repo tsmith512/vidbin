@@ -14,6 +14,8 @@ export const UploadForm = (props: uploadFormProps) => {
   const uploadPrep = (e: React.FormEvent) => {
     e.preventDefault();
 
+    // A file field "files" prop is an array, but the parent upload handler
+    // wants just the one field provided.
     let targetFile = false as File | false;
     if (fileField.current?.files?.length) {
       targetFile = fileField.current.files[0];
@@ -53,6 +55,7 @@ export const UploadForm = (props: uploadFormProps) => {
           type="file"
           name="file"
           id="fileInput"
+          required
         />
       </div>
       <div className="form-group text-center">

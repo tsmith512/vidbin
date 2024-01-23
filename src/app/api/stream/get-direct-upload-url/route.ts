@@ -15,7 +15,7 @@ const tag = process.env.ACCOUNT_TAG;
  */
 export async function POST(request: NextRequest) {
   const input = await request.json();
-  const name = input.name || '';
+  const name = input.name ?? 'untitled';
 
   // It's a temporary paste-bin, so let's make videos temporary:
   const deletionDate = new Date();
@@ -30,14 +30,10 @@ export async function POST(request: NextRequest) {
       creator: 'vidbin beta',
       maxDurationSeconds: 60 * 30,
       scheduledDeletion: deletionDate,
-
-      // QUESTION FOR THE TEAM: None of these get set. I'm trying to pre-set the
-      // name of the video as it appears in the Dash UI.
-      name: 'name in body',
-      filename: 'filename in body',
       meta: {
-        name: 'name in meta', // This seems to get replaced by the upload call
-        filename: 'filename in meta', // This gets saved, but isn't what we use
+        // This will be overridden by the filename provided when uploaded, but
+        // this is what will show in API/Dash until that happens.
+        name: name,
       },
     }),
   };
@@ -48,12 +44,13 @@ export async function POST(request: NextRequest) {
   );
 
   const data = await response.json();
+  console.log(data);
 
   if (!response.ok) {
     return new Response('error', { status: 500 });
   }
 
-  // Now prepare the data we'll save and send to the user:
+  // Now prepare the data we'll save and send to the user and save in our own DB
   const { uid, uploadURL, scheduledDeletion } = data.result;
 
   //  We want to note when this was created:
@@ -73,9 +70,12 @@ export async function POST(request: NextRequest) {
     .run();
 
   if (!success) {
+    console.log('Failed to create VidBin record.');
     return new Response('Failed to create VidBin record.', { status: 500 });
   }
 
+  // Now we need to get the VidBin ID (numeric table ID) that we just created.
+  // @TODO: Question for D1 folks -- is there a 'last inserted id' feature?
   const id = await process.env.DB.prepare(`SELECT id FROM videos WHERE video_id = ?`)
     .bind(uid)
     .first('id');
@@ -91,8 +91,7 @@ export async function POST(request: NextRequest) {
     }),
     {
       headers: {
-        'Access-Control-Allow-Headers': '*',
-        'Access-Control-Allow-Origin': '*',
+        'Content-type': 'application/json',
       },
     }
   );

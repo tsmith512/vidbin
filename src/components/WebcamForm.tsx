@@ -98,7 +98,7 @@ export const WebcamForm = (props: webcamFormProps) => {
     e.preventDefault();
 
     props.uploadHandler({
-      name: nameField.current?.value || '',
+      name: nameField.current?.value ?? '',
       file,
     });
   };
