@@ -61,7 +61,7 @@ export default function View() {
           <div className="column col-4 col-md-6 col-xs-12" key={v.id}>
             <a onClick={() => { router.push(`/view/${v.id}`); }} className="card">
               <div className="card-image">
-                <img className="img-responsive" src={`https://cloudflarestream.com/${v.video_id}/thumbnails/thumbnail.gif`} />
+                <img src={`https://cloudflarestream.com/${v.video_id}/thumbnails/thumbnail.gif`} />
               </div>
               <div className="card-header">
                 <div className="card-title h5">{v.name}</div>

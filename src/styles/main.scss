@@ -105,7 +105,13 @@ footer {
 }
 
 .recent-videos {
+  > .column {
+    display: flex;
+    align-items: stretch;
+  }
+
   .card {
+    width: 100%;
     margin-bottom: $unit-4;
     box-shadow: 0 0 5px rgba(0,0,0,0.125);
     transition: box-shadow 0.2s ease-out;
@@ -113,5 +119,22 @@ footer {
     &:hover {
       box-shadow: 0 0 5px rgba(0,0,0,0.5);
     }
+  }
+
+  .card-image {
+    position: relative;
+
+    &:after {
+      content: " ";
+      display: block;
+      padding-bottom: 100%;
+    }
+  }
+
+  img {
+    position: absolute;
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
   }
 }
