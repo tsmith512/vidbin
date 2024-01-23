@@ -3,11 +3,6 @@ import type { NextRequest } from 'next/server';
 export const runtime = 'edge';
 export const fetchCache = 'force-no-store';
 
-// These are stored in environment variables on Pages (or Workers or your own
-// origin application) because we don't want the public to get a Stream API key.
-const key = process.env.ACCOUNT_KEY;
-const tag = process.env.ACCOUNT_TAG;
-
 /**
  * Ask our own database for video info. Stream is telling us (via the webhook)
  * when a video is ready to play, so we just need to pass that info back to the

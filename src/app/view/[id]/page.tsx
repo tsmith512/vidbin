@@ -86,7 +86,7 @@ export default function ViewSingle({ params }: { params: { id: string } }) {
 
   return (
     <>
-      <h2>View a Video</h2>
+      <h2>{videoInfo?.name ?? 'View a Video'}</h2>
       {videoInfo?.status.match(/^ERR/i) && errored()}
       {videoInfo?.status !== 'ready' && waiting()}
       {videoInfo?.status === 'ready' && (
