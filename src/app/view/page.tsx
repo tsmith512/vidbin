@@ -18,7 +18,6 @@ export default function View() {
   };
 
   const getRecentVideos = async () => {
-    console.log('running');
     const result = await fetch('/api/get-recent-videos');
     result.json().then(v => setVideos(v));
   };
