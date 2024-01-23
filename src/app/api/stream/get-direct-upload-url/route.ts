@@ -17,6 +17,10 @@ export async function POST(request: NextRequest) {
   const input = await request.json();
   const name = input.name || '';
 
+  // It's a temporary paste-bin, so let's make videos temporary:
+  const deletionDate = new Date();
+  deletionDate.setDate(deletionDate.getDate() + 31);
+
   const options = {
     method: 'POST',
     headers: {
@@ -25,8 +29,12 @@ export async function POST(request: NextRequest) {
     body: JSON.stringify({
       creator: 'vidbin beta',
       maxDurationSeconds: 60 * 30,
+      scheduledDeletion: deletionDate,
+      name: 'name in body',
+      filename: 'filename in body',
       meta: {
-        name,
+        name: 'name in meta',
+        filename: 'filename in meta',
       },
     }),
   };
