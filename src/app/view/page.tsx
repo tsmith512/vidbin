@@ -32,10 +32,14 @@ export default function View() {
   return (
     <>
       <h2>View a Video</h2>
-      <h3>With a Code</h3>
       <form onSubmit={gotoVideo}>
-        <div className="input-group">
-          <input className="form-input" type="text" ref={idField} />
+        <div className="input-group view-by-code-form">
+          <input
+            className="form-input"
+            type="text"
+            ref={idField}
+            placeholder="Enter VidBin ID"
+          />
           <button
             className="btn btn-primary input-group-btn"
             type="submit"
@@ -46,8 +50,11 @@ export default function View() {
         </div>
       </form>
 
+      <div className="divider text-center" data-content="OR" style={{margin: '2rem 0'}}></div>
+
       <h3>Recent Uploads</h3>
       { videos.length > 0 || (<div className="empty"><p className="empty-title h5">No recent uploads</p></div>)}
+
 
       <div className="columns recent-videos">
         { videos.map(v => (
