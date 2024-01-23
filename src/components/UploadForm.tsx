@@ -30,7 +30,7 @@ export const UploadForm = (props: uploadFormProps) => {
     });
   };
   return (
-    <form onSubmit={props.uploadHandler}>
+    <form onSubmit={uploadPrep}>
       <div className="form-group">
         <label className="form-label" htmlFor="nameInput">
           Name
