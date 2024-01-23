@@ -58,6 +58,8 @@ export default function Home() {
     // but using the VidBin API's response (`data`) for the ID of the new page.
     if (result.ok) {
       router.push(`/view/${data.id}`);
+    } else {
+      alert(`Direct upload failed: ${result.status} ${result.statusText}`);
     }
   };
 
