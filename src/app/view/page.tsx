@@ -19,9 +19,8 @@ export default function View() {
 
   const getRecentVideos = async () => {
     console.log('running');
-    // const result = await fetch('/api/get-recent-videos');
-    // result.json().then(v => setVideos(v));
-    setVideos(JSON.parse('[{"id":10,"video_id":"7e8ebdde9b924eb5ae28417eeea13ea6","endpoint":"https://upload.cloudflarestream.com/7e8ebdde9b924eb5ae28417eeea13ea6","name":"rawrrrrrrrrrrrrrrrrrrrrrrr","created":"2024-01-23T05:50:05.763Z","status":"ready","scheduledDeletion":"2024-02-23T05:50:04.58Z"},{"id":9,"video_id":"937dbc13bc614a9795dfa987ca4b096f","endpoint":"https://upload.cloudflarestream.com/937dbc13bc614a9795dfa987ca4b096f","name":"siiiiiiiiiiiigh","created":"2024-01-23T05:47:18.247Z","status":"ready","scheduledDeletion":"2024-02-23T05:47:17.925Z"},{"id":8,"video_id":"e976d31a4c3e4c5f90382fa71faed3c7","endpoint":"https://upload.cloudflarestream.com/e976d31a4c3e4c5f90382fa71faed3c7","name":"again and again and again","created":"2024-01-23T05:42:51.377Z","status":"ready","scheduledDeletion":"2024-02-23T05:42:51.112Z"},{"id":7,"video_id":"1e113b1f7bc84223b4863bd356ae4b9d","endpoint":"https://upload.cloudflarestream.com/1e113b1f7bc84223b4863bd356ae4b9d","name":"more fixes ","created":"2024-01-23T05:38:06.648Z","status":"ready","scheduledDeletion":"2024-02-23T05:38:06.197Z"},{"id":6,"video_id":"6614c0e2b9e84996aeae2a9c7e8517f6","endpoint":"https://upload.cloudflarestream.com/6614c0e2b9e84996aeae2a9c7e8517f6","name":"and with a way to grab the id","created":"2024-01-23T05:35:14.960Z","status":"ready","scheduledDeletion":"2024-02-23T05:35:14.642Z"},{"id":5,"video_id":"fe3bcea491854c5481dc33769d8f5fbf","endpoint":"https://upload.cloudflarestream.com/fe3bcea491854c5481dc33769d8f5fbf","name":"first one with our status handler","created":"2024-01-23T05:27:07.725Z","status":"ready","scheduledDeletion":"2024-02-23T05:27:07.438Z"},{"id":4,"video_id":"e5bdba08437c43cebcac934680a17e5e","endpoint":"https://upload.cloudflarestream.com/e5bdba08437c43cebcac934680a17e5e","name":"and another","created":"2024-01-23T05:10:43.876Z","status":"ready","scheduledDeletion":"2024-02-23T05:10:43.528Z"},{"id":3,"video_id":"453a7d139a57473fbe6d58f6201e0bec","endpoint":"https://upload.cloudflarestream.com/453a7d139a57473fbe6d58f6201e0bec","name":"testing while watching for webjhooks","created":"2024-01-23T04:51:13.647Z","status":"ready","scheduledDeletion":"2024-02-23T04:51:13.274Z"},{"id":2,"video_id":"d8a41a7a13654762b13987ec9b3b6cb1","endpoint":"https://upload.cloudflarestream.com/d8a41a7a13654762b13987ec9b3b6cb1","name":"test with webhook in place","created":"2024-01-23T04:46:57.488Z","status":"ready","scheduledDeletion":"2024-02-23T04:46:56.868Z"},{"id":1,"video_id":"dfe8d3434fe74a34bee7ed90eb1f0c02","endpoint":"https://upload.cloudflarestream.com/dfe8d3434fe74a34bee7ed90eb1f0c02","name":"boothby","created":"2024-01-23T04:13:25.225Z","status":"TEST","scheduledDeletion":"2024-02-23T04:13:24.777Z"}]'));
+    const result = await fetch('/api/get-recent-videos');
+    result.json().then(v => setVideos(v));
   };
 
   useEffect(() => {
@@ -57,7 +56,8 @@ export default function View() {
 
 
       <div className="columns recent-videos">
-        { videos.map(v => (
+        { /* @TODO: Type checking */ }
+        { videos.map((v: any) => (
           <div className="column col-4 col-md-6 col-xs-12" key={v.id}>
             <a onClick={() => { router.push(`/view/${v.id}`); }} className="card">
               <div className="card-image">
