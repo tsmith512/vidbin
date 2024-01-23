@@ -18,7 +18,7 @@ const tag = process.env.ACCOUNT_TAG;
  */
 export async function POST(request: NextRequest) {
   const input = await request.json();
-  const id: number | false = input?.id || false;
+  const id: number | false = parseInt(input?.id) || false;
 
   if (!id) {
     return new Response('No VidBin ID provided', { status: 400 });
