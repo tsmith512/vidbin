@@ -28,6 +28,19 @@ export default function View() {
     getRecentVideos();
   }, []);
 
+  const timeSince = (input: string): string => {
+    const then = new Date(input);
+    const now = new Date();
+
+    const hours = Math.ceil((now - then) / 1000 / 60 / 60);
+
+    if (hours < 48) {
+      return `${hours}hr`;
+    } else {
+      return `${Math.ceil(hours / 24)}d`;
+    }
+  }
+
   return (
     <>
       <h2>View a Video</h2>
@@ -65,7 +78,7 @@ export default function View() {
               </div>
               <div className="card-header">
                 <div className="card-title h5">{v.name}</div>
-                <div className="card-subtitle text-gray">{v.created}</div>
+                <div className="card-subtitle text-gray">{timeSince(v.created)}</div>
               </div>
             </a>
           </div>
