@@ -30,3 +30,27 @@ CREATE TABLE videos (
 );
 
 ```
+
+## How we get status updates from the Stream API
+
+When on-demand videos are processed, Stream API can call a webhook.
+
+- https://developers.cloudflare.com/stream/manage-video-library/using-webhooks/#notifications
+- It calls [this endpoint](./src/app/api/webhook/route.ts)
+- Setup:
+  - PUT to https://api.cloudflare.com/client/v4/accounts/TAG/stream/webhook
+  - Body: `{"notificationUrl": "https://dev.vidbin.pages.dev/api/webhook"}`
+  - Response:
+    ```
+      {
+          "result": {
+              "notification_url": "https://dev.vidbin.pages.dev/api/webhook",
+              "notificationUrl": "https://dev.vidbin.pages.dev/api/webhook",
+              "modified": "2024-01-23T04:45:33.324235Z",
+              "secret": "REDACTED"
+          },
+          "success": true,
+          "errors": [],
+          "messages": []
+      }
+    ```
