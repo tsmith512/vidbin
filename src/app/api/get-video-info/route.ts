@@ -20,10 +20,14 @@ export async function POST(request: NextRequest) {
   }
 
   if (typeof id !== 'number') {
-    return new Response('VidBin ID is numeric. (Did you send a Stream ID?)', { status: 400 });
+    return new Response('VidBin ID is numeric. (Did you send a Stream ID?)', {
+      status: 400,
+    });
   }
 
-  const result = await process.env.DB.prepare(`SELECT * FROM videos WHERE id = ?`).bind(id).first();
+  const result = await process.env.DB.prepare(`SELECT * FROM videos WHERE id = ?`)
+    .bind(id)
+    .first();
 
   if (!result) {
     return new Response('VidBin not found.', { status: 404 });

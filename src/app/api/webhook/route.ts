@@ -31,9 +31,13 @@ export async function POST(request: NextRequest) {
     stateMessage = data.status?.state ?? 'unknown';
   }
 
-  const result = await process.env.DB.prepare(`
+  const result = await process.env.DB.prepare(
+    `
     UPDATE videos SET status = ? WHERE video_id = ?
-  `).bind(stateMessage, data.uid).run();
+  `
+  )
+    .bind(stateMessage, data.uid)
+    .run();
 
   console.log(result);
 
@@ -41,10 +45,10 @@ export async function POST(request: NextRequest) {
     // The query succeeded, but didn't match anything in the DB.
     // Ultimately, this means a webhook was generated for a video in my account
     // unrelated to VidBin.
-    return new Response('Video not recorded in VidBin', {status: 404});
+    return new Response('Video not recorded in VidBin', { status: 404 });
   } else if (result?.meta?.changes === 1) {
     // Happy path
-    return new Response(null, {status: 204});
+    return new Response(null, { status: 204 });
   }
 
   // We changed more than one row?

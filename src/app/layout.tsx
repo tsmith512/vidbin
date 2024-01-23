@@ -24,8 +24,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           </section>
           <main>{children}</main>
           <footer>
-            &copy; {new Date().getFullYear()} &bull; Created by TSmith &bull;
-            Based on internal project Paste.Video by Scott and Ryan 🧡
+            &copy; {new Date().getFullYear()} &bull; Created by TSmith &bull; Based on
+            internal project Paste.Video by Scott and Ryan 🧡
           </footer>
         </div>
       </body>

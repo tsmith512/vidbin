@@ -19,7 +19,7 @@ export default function View() {
 
   const getRecentVideos = async () => {
     const result = await fetch('/api/get-recent-videos');
-    result.json().then(v => setVideos(v));
+    result.json().then((v) => setVideos(v));
   };
 
   useEffect(() => {
@@ -38,7 +38,7 @@ export default function View() {
     } else {
       return `${Math.ceil(hours / 24)}d`;
     }
-  }
+  };
 
   return (
     <>
@@ -51,29 +51,40 @@ export default function View() {
             ref={idField}
             placeholder="Enter VidBin ID"
           />
-          <button
-            className="btn btn-primary input-group-btn"
-            type="submit"
-            name="submit"
-          >
+          <button className="btn btn-primary input-group-btn" type="submit" name="submit">
             Watch
           </button>
         </div>
       </form>
 
-      <div className="divider text-center" data-content="OR" style={{margin: '2rem 0'}}></div>
+      <div
+        className="divider text-center"
+        data-content="OR"
+        style={{ margin: '2rem 0' }}
+      ></div>
 
       <h3>Recent Uploads</h3>
-      { videos.length > 0 || (<div className="empty"><p className="empty-title h5">No recent uploads</p></div>)}
-
+      {videos.length > 0 || (
+        <div className="empty">
+          <p className="empty-title h5">No recent uploads</p>
+        </div>
+      )}
 
       <div className="columns recent-videos">
-        { /* @TODO: Type checking */ }
-        { videos.map((v: any) => (
+        {/* @TODO: Type checking */}
+        {videos.map((v: any) => (
           <div className="column col-4 col-md-6 col-xs-12" key={v.id}>
-            <a onClick={() => { router.push(`/view/${v.id}`); }} className="card">
+            <a
+              onClick={() => {
+                router.push(`/view/${v.id}`);
+              }}
+              className="card"
+            >
               <div className="card-image">
-                <img src={`https://cloudflarestream.com/${v.video_id}/thumbnails/thumbnail.gif`} />
+                <img
+                  alt={v.name ?? 'Untitled video upload'}
+                  src={`https://cloudflarestream.com/${v.video_id}/thumbnails/thumbnail.gif`}
+                />
               </div>
               <div className="card-header">
                 <div className="card-title h5">{v.name}</div>
@@ -81,7 +92,7 @@ export default function View() {
               </div>
             </a>
           </div>
-        )) }
+        ))}
       </div>
     </>
   );

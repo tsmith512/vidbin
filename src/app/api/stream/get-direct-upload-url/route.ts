@@ -63,17 +63,22 @@ export async function POST(request: NextRequest) {
   // one we calculated in the original request.
   // (@TODO: Can I articulate a good reason for that? Or am I being weird...)
 
-  const { success } = await process.env.DB.prepare(`
+  const { success } = await process.env.DB.prepare(
+    `
     INSERT INTO videos (video_id, endpoint,  name, created,            status,     scheduledDeletion)
     VALUES             (?,        ?,         ?,    ?,                  ?,          ?);
-  `).bind(              uid,      uploadURL, name, date.toISOString(), 'reserved', scheduledDeletion)
-  .run();
+  `
+  )
+    .bind(uid, uploadURL, name, date.toISOString(), 'reserved', scheduledDeletion)
+    .run();
 
   if (!success) {
-    return new Response('Failed to create VidBin record.', {status: 500});
+    return new Response('Failed to create VidBin record.', { status: 500 });
   }
 
-  const id = await process.env.DB.prepare(`SELECT id FROM videos WHERE video_id = ?`).bind(uid).first('id');
+  const id = await process.env.DB.prepare(`SELECT id FROM videos WHERE video_id = ?`)
+    .bind(uid)
+    .first('id');
 
   return new Response(
     JSON.stringify({

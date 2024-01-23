@@ -12,18 +12,17 @@ export const fetchCache = 'force-no-store';
  * @returns
  */
 export async function GET(request: NextRequest) {
-  const { results } = await process.env.DB.prepare(`SELECT * FROM videos WHERE status = 'ready' ORDER BY id DESC LIMIT 18`).run();
+  const { results } = await process.env.DB.prepare(
+    `SELECT * FROM videos WHERE status = 'ready' ORDER BY id DESC LIMIT 18`
+  ).run();
 
   if (!results.length) {
     return new Response('No videos found.', { status: 404 });
   }
 
-  return new Response(
-    JSON.stringify(results),
-    {
-      headers: {
-        'Content-type': 'application/json',
-      },
-    }
-  );
+  return new Response(JSON.stringify(results), {
+    headers: {
+      'Content-type': 'application/json',
+    },
+  });
 }

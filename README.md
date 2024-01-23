@@ -15,7 +15,7 @@ Stream, but I wanted to enable these things:
 - Demonstrating common advice I give to prospects/customers, that there are
   uses in maintaining a map between the Stream video and custom data.
 
-``` sql
+```sql
 
 CREATE TABLE videos (
     id                INTEGER PRIMARY KEY AUTOINCREMENT
