@@ -8,13 +8,16 @@ import { useState, useEffect, useRef } from 'react';
 import { Stream } from '@cloudflare/stream-react';
 
 interface videoInfoProps {
-  video_id: string;
+  id: number; // This is the VidBin ID (numeric)
+  video_id: string; // This is the Stream ID (long UUID string)
   status: string;
   name: string;
   duration: string;
   created: string;
 }
 
+// id here is a VidBin numeric ID, not a Stream ID. We don't want this app
+// providing a view page for every video that exists, eh?
 export default function ViewSingle({ params }: { params: { id: string } }) {
   const [videoInfo, setVideoInfo] = useState(null as null | videoInfoProps);
   const pollingRef = useRef<ReturnType<typeof setInterval>>();
@@ -23,10 +26,10 @@ export default function ViewSingle({ params }: { params: { id: string } }) {
   useEffect(() => {
     const pollVideoInfo = async () => {
       console.log('Polling for video information');
-      const response = await fetch(`/api/stream/get-video-info`, {
+      const response = await fetch(`/api/get-video-info`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ video_id: params.id }),
+        body: JSON.stringify({ id: params.id }),
       });
 
       const data = await response.json();
@@ -34,7 +37,7 @@ export default function ViewSingle({ params }: { params: { id: string } }) {
       setVideoInfo(data);
 
       console.log(data);
-      if (data.status === 'ready') {
+      if (data.status === 'ready' || data.status === 'error' || data.status.includes('ERR')) {
         console.log('Video is ready, ending poll');
         setAreWePolling(false);
       }
@@ -72,13 +75,23 @@ export default function ViewSingle({ params }: { params: { id: string } }) {
     </div>
   );
 
+  const errored = () => (
+    <div className="empty">
+      <div className="loading loading-lg"></div>
+      <p className="empty-title h5">
+        This video is unavailable due to an error ({videoInfo?.status ?? 'unknown'}).
+      </p>
+    </div>
+  );
+
   return (
     <>
       <h2>View a Video</h2>
+      {videoInfo?.status.match(/^ERR/i) && errored()}
       {videoInfo?.status !== 'ready' && waiting()}
       {videoInfo?.status === 'ready' && (
         <div className="player-container">
-          <Stream controls responsive={false} src={params.id} />
+          <Stream controls responsive={false} src={videoInfo.video_id} />
         </div>
       )}
     </>
