@@ -51,9 +51,10 @@ export default function Home() {
       body: submission,
     });
 
+    // Watch out! We're looking for an `ok` from the Stream Direct Upload endpoint
+    // but using the VidBin API's response (`data`) for the ID of the new page.
     if (result.ok) {
-      const newVidbin = await result.json();
-      router.push(`/view/${newVidbin.id}`);
+      router.push(`/view/${data.id}`);
     }
   };
 

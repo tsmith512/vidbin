@@ -79,9 +79,7 @@ export async function POST(request: NextRequest) {
     JSON.stringify({
       // This is our VidBin ID
       id,
-
       // This will be the Stream Video ID
-
       video_id: uid,
       // And this is our temporary URL that we should upload it to
       endpoint: uploadURL,
