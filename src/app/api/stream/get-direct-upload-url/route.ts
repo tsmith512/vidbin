@@ -42,7 +42,15 @@ export async function POST(request: NextRequest) {
     return new Response('error', { status: 500 });
   }
 
-  const { uid, uploadURL } = data.result;
+  const { uid, uploadURL, scheduledDeletion } = data.result;
+
+  const date = new Date();
+
+  const { success } = await process.env.DB.prepare(`
+    INSERT INTO videos (video_id, endpoint, created, status, scheduledDeletion)
+    VALUES             (?,        ?,        ?,       ?,      ?);
+  `).bind(uid, uploadURL, date.toISOString(), 'reserved', scheduledDeletion)
+  .run();
 
   return new Response(
     JSON.stringify({
