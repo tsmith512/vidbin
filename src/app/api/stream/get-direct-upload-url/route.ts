@@ -53,14 +53,20 @@ export async function POST(request: NextRequest) {
     return new Response('error', { status: 500 });
   }
 
+  // Now prepare the data we'll save and send to the user:
   const { uid, uploadURL, scheduledDeletion } = data.result;
 
+  //  We want to note when this was created:
   const date = new Date();
 
+  // We will pass the scheduled deletion date the API gave us rather than the
+  // one we calculated in the original request.
+  // (@TODO: Can I articulate a good reason for that? Or am I being weird...)
+
   const { success } = await process.env.DB.prepare(`
-    INSERT INTO videos (video_id, endpoint, created, status, scheduledDeletion)
-    VALUES             (?,        ?,        ?,       ?,      ?);
-  `).bind(uid, uploadURL, date.toISOString(), 'reserved', scheduledDeletion)
+    INSERT INTO videos (video_id, endpoint,  name, created,            status,     scheduledDeletion)
+    VALUES             (?,        ?,         ?,    ?,                  ?,          ?);
+  `).bind(              uid,      uploadURL, name, date.toISOString(), 'reserved', scheduledDeletion)
   .run();
 
   return new Response(

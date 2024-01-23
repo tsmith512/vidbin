@@ -18,13 +18,15 @@ Stream, but I wanted to enable these things:
 ``` sql
 
 CREATE TABLE videos (
-    id              INTEGER PRIMARY KEY AUTOINCREMENT
-                            NOT NULL,
-    stream_video_id TEXT    UNIQUE
-                            NOT NULL,
-    upload_endpoint TEXT,
-    created         TEXT,
-    status          TEXT
+    id                INTEGER PRIMARY KEY AUTOINCREMENT
+                              NOT NULL,
+    video_id          TEXT    UNIQUE
+                              NOT NULL,
+    endpoint          TEXT,
+    name              TEXT,
+    created           TEXT,
+    status            TEXT,
+    scheduledDeletion TEXT
 );
 
 ```
