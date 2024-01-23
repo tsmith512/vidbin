@@ -120,7 +120,7 @@ export const WebcamForm = (props: webcamFormProps) => {
       <div className="form-group">
         <label className="form-label">Recording:</label>
         <div className="columns">
-          <div className="column col-6 col-md-12 text-center video-buttons">
+          <div className="column col-6 col-md-4 text-center video-buttons">
             <button
               className="btn btn-secondary"
               onClick={startRecording}
@@ -136,7 +136,7 @@ export const WebcamForm = (props: webcamFormProps) => {
               Stop
             </button>
           </div>
-          <div className="column col-6 col-md-12">
+          <div className="column col-6 col-md-8">
             <video ref={webcamPreview} autoPlay muted loop className="video-preview" />
           </div>
         </div>

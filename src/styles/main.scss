@@ -54,6 +54,10 @@ footer {
 .hero {
   padding: 1rem 1rem;
   color: $primary-color;
+
+  p {
+    margin-bottom: 0;
+  }
 }
 
 .video-buttons {
@@ -62,11 +66,6 @@ footer {
   justify-content: center;
 
   /* How the did I not realize this was a desktop-first framework... */
-  @media (max-width: 840px) {
-    & {
-      flex-direction: row;
-    }
-  }
 }
 
 .video-buttons button {
