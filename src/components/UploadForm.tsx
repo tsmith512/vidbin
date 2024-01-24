@@ -16,9 +16,9 @@ export const UploadForm = (props: uploadFormProps) => {
 
     // A file field "files" prop is an array, but the parent upload handler
     // wants just the one field provided.
-    let targetFile = false as File | false;
+    let targetFile = null as File | null;
     if (fileField.current?.files?.length) {
-      targetFile = fileField.current.files[0];
+      targetFile = fileField.current.files.item(0);
     }
 
     if (!targetFile) {
@@ -27,8 +27,8 @@ export const UploadForm = (props: uploadFormProps) => {
     }
 
     props.uploadHandler({
-      name: nameField.current?.value || '',
-      file: targetFile || undefined,
+      name: nameField.current?.value || null,
+      file: targetFile,
     });
   };
   return (

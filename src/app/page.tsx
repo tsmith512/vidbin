@@ -72,11 +72,14 @@ export default function Home() {
     submission.append('name', input.name);
 
     // We create a new File() here because we want to set the name of it to the
-    // value in the form field. Otherwise it'll use the filename or be called
-    // "blob" if it came from the webcam recorder.
+    // value in the form field. Otherwise it'll use the filename from the user's
+    // actual storage, or it'll be called "blob" if it came from the webcam
+    // recorder. If the file is submitted without a name at all, it can cause
+    // an error on the upload endpoint, so we coalesce down to today's date.
+    const filename = input.name ?? new Date().toDateString();
     submission.append(
       'file',
-      new File([input.file], input.name, { type: input.file.type })
+      new File([input.file], filename, { type: input.file.type })
     );
 
     setUploadingMessages((previously) => [...previously, `Starting transfer.`]);
@@ -102,10 +105,10 @@ export default function Home() {
       setUploadingMessages((previously) => [...previously, `Loading viewer`]);
       router.push(`/view/${data.id}`);
     } else {
-      const fullResponse = await result.json();
+      const fullResponse = await result.text();
       setUploadingMessages((previously) => [
         ...previously,
-        `Upload failed. ${result.status} ${result.statusText}: ${fullResponse}`,
+        `Upload failed. Stream responses ${result.status} ${result.statusText}: ${fullResponse}`,
       ]);
       setUploading(false);
     }
@@ -123,7 +126,7 @@ export default function Home() {
         />
         <label className="accordion-header" htmlFor="fileSource">
           <i className="icon icon-arrow-right mr-1"></i>
-          File Upload
+          Upload a Video File
         </label>
         <div className="accordion-body">
           {inputSource === sources.file && <UploadForm uploadHandler={uploadHandler} />}
@@ -139,7 +142,7 @@ export default function Home() {
         />
         <label className="accordion-header" htmlFor="webcamSource">
           <i className="icon icon-arrow-right mr-1"></i>
-          Webcam Recording
+          Record with Camera
         </label>
         <div className="accordion-body">
           {inputSource === sources.webcam && <WebcamForm uploadHandler={uploadHandler} />}
