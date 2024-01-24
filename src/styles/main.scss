@@ -99,6 +99,14 @@ footer {
   height: 100%;
 }
 
+.upload-progress-divider {
+}
+
+.upload-progress-messages {
+  color: $gray-color-dark;
+  font-size: 0.625rem;
+}
+
 .view-by-code-form {
   max-width: 480px;
   margin: $unit-4 auto;
