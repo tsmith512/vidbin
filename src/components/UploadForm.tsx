@@ -26,9 +26,13 @@ export const UploadForm = (props: uploadFormProps) => {
       return;
     }
 
+    const filenameToSend = nameField.current?.value ?? new Date().toDateString();
+
+    // We create a new File() here so that we can set the name of it to be what
+    // the user entered, instead of the name exposed by the filesystem.
     props.uploadHandler({
-      name: nameField.current?.value || null,
-      file: targetFile,
+      name: filenameToSend,
+      file: new File([targetFile], filenameToSend, { type: targetFile.type }),
     });
   };
   return (

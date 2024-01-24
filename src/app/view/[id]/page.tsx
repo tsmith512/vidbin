@@ -95,7 +95,8 @@ export default function ViewSingle({ params }: { params: { id: string } }) {
       {videoInfo?.status !== 'ready' && waiting()}
       {videoInfo?.status === 'ready' && (
         <div className="player-container">
-          <Stream controls playsinline responsive={false} src={videoInfo.video_id} />
+          { /* playsinline recommended, but throws type error */ }
+          <Stream controls responsive={false} src={videoInfo.video_id} />
         </div>
       )}
     </>

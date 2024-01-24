@@ -8,7 +8,7 @@ import { WebcamForm } from '@/components/WebcamForm';
 
 interface uploadHandlerProps {
   name: string;
-  file: Blob | File;
+  file: File;
 }
 
 enum sources {
@@ -70,17 +70,7 @@ export default function Home() {
     ]);
     const submission = new FormData();
     submission.append('name', input.name);
-
-    // We create a new File() here because we want to set the name of it to the
-    // value in the form field. Otherwise it'll use the filename from the user's
-    // actual storage, or it'll be called "blob" if it came from the webcam
-    // recorder. If the file is submitted without a name at all, it can cause
-    // an error on the upload endpoint, so we coalesce down to today's date.
-    const filename = input.name ?? new Date().toDateString();
-    submission.append(
-      'file',
-      new File([input.file], filename, { type: input.file.type })
-    );
+    submission.append('file', input.file);
 
     setUploadingMessages((previously) => [...previously, `Starting transfer.`]);
 

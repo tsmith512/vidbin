@@ -97,9 +97,17 @@ export const WebcamForm = (props: webcamFormProps) => {
   const uploadPrep = (e: React.FormEvent) => {
     e.preventDefault();
 
+    if (!file) {
+      alert('Please record something first.');
+      return;
+    }
+
+    const filenameToSend = nameField.current?.value ?? new Date().toDateString();
+    const fileToSend = new File([file], filenameToSend, { type: 'video/webm' });
+
     props.uploadHandler({
-      name: nameField.current?.value ?? '',
-      file,
+      name: filenameToSend,
+      file: fileToSend,
     });
   };
 
