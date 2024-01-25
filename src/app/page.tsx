@@ -20,7 +20,7 @@ export default function Home() {
   const router = useRouter();
   const [uploading, setUploading] = useState(false);
   const [uploadingMessages, setUploadingMessages] = useState<string[]>([]);
-  const [inputSource, setInputSource] = useState<sources>(sources.file);
+  const [inputSource, setInputSource] = useState<sources>(sources.webcam);
 
   const uploadHandler = async (input: uploadHandlerProps): Promise<void> => {
     // @TODO: Check for file-size. Current request is a 200MB max basic upload URL
@@ -109,6 +109,7 @@ export default function Home() {
       <div className="accordion">
         <input
           onClick={() => setInputSource(sources.file)}
+          checked={inputSource === sources.file}
           type="radio"
           id="fileSource"
           name="inputSource"
@@ -125,6 +126,7 @@ export default function Home() {
       <div className="accordion">
         <input
           onClick={() => setInputSource(sources.webcam)}
+          checked={inputSource === sources.webcam}
           type="radio"
           id="webcamSource"
           name="inputSource"

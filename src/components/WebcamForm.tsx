@@ -126,7 +126,6 @@ export const WebcamForm = (props: webcamFormProps) => {
         />
       </div>
       <div className="form-group">
-        <label className="form-label">Recording:</label>
         <div className="columns">
           <div className="column col-6 col-md-4 text-center video-buttons">
             <button
@@ -134,14 +133,14 @@ export const WebcamForm = (props: webcamFormProps) => {
               onClick={startRecording}
               disabled={recording}
             >
-              Record
+              Start Recording
             </button>
             <button
               className="btn btn-secondary"
               onClick={stopRecording}
               disabled={!recording}
             >
-              Stop
+              Stop &amp; Preview
             </button>
           </div>
           <div className="column col-6 col-md-8">
@@ -150,7 +149,7 @@ export const WebcamForm = (props: webcamFormProps) => {
         </div>
       </div>
       <div className="form-group text-center">
-        <button type="submit" name="submit" className="btn btn-primary">
+        <button disabled={file === null} type="submit" name="submit" className="btn btn-primary">
           <i className="icon icon-upload"></i> Upload
         </button>
       </div>

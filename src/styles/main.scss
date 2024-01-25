@@ -71,6 +71,13 @@ footer {
 .video-buttons button {
   display: block;
   margin: 0.5rem auto;
+  width: 100%;
+  height: auto;
+  white-space: normal;
+
+  @media screen and (max-width: 420px) {
+    font-size: .625rem;
+  }
 }
 
 .video-preview {
