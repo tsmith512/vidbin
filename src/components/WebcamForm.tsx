@@ -145,7 +145,7 @@ export const WebcamForm = (props: webcamFormProps) => {
             </button>
           </div>
           <div className="column col-6 col-md-8">
-            <video ref={webcamPreview} autoPlay muted loop className="video-preview" />
+            <video ref={webcamPreview} playsInline autoPlay muted loop className="video-preview" />
           </div>
         </div>
       </div>
