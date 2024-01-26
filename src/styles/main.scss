@@ -43,6 +43,10 @@ main {
   flex-direction: column;
 
   padding: 0 1rem;
+
+  h1 {
+    margin-bottom: 0.125rem;
+  }
 }
 
 footer {
@@ -104,6 +108,14 @@ footer {
   flex-grow: 1;
   width: 100%;
   height: 100%;
+}
+
+.upload-method-buttons {
+  margin: 0 2rem 1rem;
+
+  @media screen and (max-width: 400px) {
+    margin: 0 0rem 1rem;
+  }
 }
 
 .upload-progress-divider {

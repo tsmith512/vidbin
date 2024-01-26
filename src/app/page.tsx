@@ -20,7 +20,7 @@ export default function Home() {
   const router = useRouter();
   const [uploading, setUploading] = useState(false);
   const [uploadingMessages, setUploadingMessages] = useState<string[]>([]);
-  const [inputSource, setInputSource] = useState<sources>(sources.webcam);
+  const [inputSource, setInputSource] = useState<sources | null>(null);
 
   const uploadHandler = async (input: uploadHandlerProps): Promise<void> => {
     // @TODO: Check for file-size. Current request is a 200MB max basic upload URL
@@ -106,40 +106,26 @@ export default function Home() {
 
   const inputStage = () => (
     <>
-      <div className="accordion">
-        <input
+      <div className="btn-group btn-group-block upload-method-buttons">
+        <button
           onClick={() => setInputSource(sources.file)}
-          checked={inputSource === sources.file}
-          type="radio"
+          className={inputSource === sources.file ? 'btn active' : 'btn'}
           id="fileSource"
           name="inputSource"
-          hidden
-        />
-        <label className="accordion-header" htmlFor="fileSource">
-          <i className="icon icon-arrow-right mr-1"></i>
-          Upload a Video File
-        </label>
-        <div className="accordion-body">
-          {inputSource === sources.file && <UploadForm uploadHandler={uploadHandler} />}
-        </div>
-      </div>
-      <div className="accordion">
-        <input
+          >
+          Pick a File
+        </button>
+        <button
           onClick={() => setInputSource(sources.webcam)}
-          checked={inputSource === sources.webcam}
-          type="radio"
+          className={inputSource === sources.webcam ? 'btn active' : 'btn'}
           id="webcamSource"
           name="inputSource"
-          hidden
-        />
-        <label className="accordion-header" htmlFor="webcamSource">
-          <i className="icon icon-arrow-right mr-1"></i>
-          Record with Camera
-        </label>
-        <div className="accordion-body">
-          {inputSource === sources.webcam && <WebcamForm uploadHandler={uploadHandler} />}
-        </div>
+        >
+          Use Camera
+        </button>
       </div>
+      {inputSource === sources.file && <UploadForm uploadHandler={uploadHandler} />}
+      {inputSource === sources.webcam && <WebcamForm uploadHandler={uploadHandler} />}
     </>
   );
 
