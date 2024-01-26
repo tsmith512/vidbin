@@ -72,6 +72,11 @@ export default function Home() {
     submission.append('name', input.name);
     submission.append('file', input.file);
 
+    setUploadingMessages((previously) => [
+      ...previously,
+      `Video "${input.name}" type "${input.file.type}"`,
+    ]);
+
     setUploadingMessages((previously) => [...previously, `Starting transfer.`]);
 
     // This is a post of our file/filename to Stream directly. This way VidBin

@@ -43,7 +43,11 @@ export const WebcamForm = (props: webcamFormProps) => {
       recorder.current.onstop = (e) => {
         const data = dataBuffer.current || [];
         if (data?.length > 0 && webcamPreview.current) {
-          const recording = new Blob(data, { type: 'video/webm' });
+          // Original source I used hard-coded "video/webm" here, but that may
+          // not be approriate to hardcode here. It might work if set when the
+          // recorder inits though...? But iOS Safari will not playback a
+          // preview here, so let's see if returning the type it gives us works.
+          const recording = new Blob(data, { type: recorder.current?.mimeType });
           setFile(recording);
           webcamPreview.current.srcObject = null;
           webcamPreview.current.src = URL.createObjectURL(recording);
