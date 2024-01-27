@@ -1,0 +1,167 @@
+@import 'variables';
+
+@import '../../node_modules/spectre.css/src/spectre.scss';
+@import '../../node_modules/spectre.css/src/spectre-icons.scss';
+
+html,
+body {
+  min-height: 100vh;
+  padding: 0;
+
+  background-color: $bg-color;
+}
+
+.container {
+  background-color: white;
+  min-height: 100vh;
+  max-width: 900px;
+
+  display: flex;
+  flex-direction: column;
+  padding: 0;
+
+  border-left: 1px solid $bg-color-dark;
+  border-right: 1px solid $bg-color-dark;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
+}
+
+section,
+main {
+  margin-bottom: 1rem;
+}
+
+nav {
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+main {
+  /* Main should grow vertically to fill horizontal space */
+  flex-grow: 1;
+
+  display: flex;
+  flex-direction: column;
+
+  padding: 0 1rem;
+
+  h1 {
+    margin-bottom: 0.125rem;
+  }
+}
+
+footer {
+  padding: 0.5rem 1rem 1rem;
+  font-size: 0.625rem;
+  color: #999;
+}
+
+.hero {
+  padding: 1rem 1rem;
+  color: $primary-color;
+
+  p {
+    margin-bottom: 0;
+  }
+}
+
+.video-buttons {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  /* How the did I not realize this was a desktop-first framework... */
+}
+
+.video-buttons button {
+  display: block;
+  margin: 0.5rem auto;
+  width: 100%;
+  height: auto;
+  white-space: normal;
+
+  @media screen and (max-width: 420px) {
+    font-size: .625rem;
+  }
+}
+
+.video-preview {
+  margin: 0 auto;
+  max-height: 50vh;
+  max-width: 100%;
+}
+
+.player-container,
+.player-container > div {
+  position: relative;
+  overflow: hidden;
+  background: black;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: stretch;
+  align-items: stretch;
+  flex-grow: 1;
+}
+
+.player-container > div,
+.player-container iframe {
+  flex-grow: 1;
+  width: 100%;
+  height: 100%;
+}
+
+.upload-method-buttons {
+  margin: 0 2rem 1rem;
+
+  @media screen and (max-width: 400px) {
+    margin: 0 0rem 1rem;
+  }
+}
+
+.upload-progress-divider {
+}
+
+.upload-progress-messages {
+  color: $gray-color-dark;
+  font-size: 0.625rem;
+}
+
+.view-by-code-form {
+  max-width: 480px;
+  margin: $unit-4 auto;
+}
+
+.recent-videos {
+  > .column {
+    display: flex;
+    align-items: stretch;
+  }
+
+  .card {
+    width: 100%;
+    margin-bottom: $unit-4;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.125);
+    transition: box-shadow 0.2s ease-out;
+
+    &:hover {
+      box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+    }
+  }
+
+  .card-image {
+    position: relative;
+
+    &:after {
+      content: ' ';
+      display: block;
+      padding-bottom: 100%;
+    }
+  }
+
+  img {
+    position: absolute;
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+  }
+}
