@@ -16,6 +16,10 @@ export const WebcamForm = (props: webcamFormProps) => {
   const recorder = useRef<MediaRecorder | null>(null);
   const nameField = useRef<HTMLInputElement | null>(null);
 
+  const [facingMode, setFacingMode] = useState('user');
+  const didMount = useRef(false);
+  const mediaSupports = navigator.mediaDevices.getSupportedConstraints();
+
   const startRecording = (e: React.MouseEvent) => {
     e.preventDefault();
 
@@ -57,6 +61,29 @@ export const WebcamForm = (props: webcamFormProps) => {
     }
   };
 
+  const switchCameras = (e: React.MouseEvent) => {
+    e.preventDefault();
+
+    if (recording) {
+      stopRecording(e);
+    }
+
+    setFacingMode((old) => {
+      return (old === 'user') ? 'environment' : 'user';
+    });
+  };
+
+  useEffect(() => {
+    // Don't mess with the initial render.
+    if (!didMount.current) {
+      didMount.current = true;
+      return;
+    }
+
+    // We just had a facing mode change, setup the live preview again.
+    setupLivePreview();
+  }, [facingMode])
+
   const stopRecording = (e: React.MouseEvent) => {
     e.preventDefault();
     if (recorder.current) {
@@ -69,7 +96,7 @@ export const WebcamForm = (props: webcamFormProps) => {
     if (webcamPreview.current) {
       stream.current = await navigator.mediaDevices.getUserMedia({
         audio: true,
-        video: true,
+        video: mediaSupports['facingMode'] ? { facingMode } : true,
       });
 
       webcamPreview.current.srcObject = stream.current;
@@ -138,6 +165,15 @@ export const WebcamForm = (props: webcamFormProps) => {
             >
               Start Recording
             </button>
+            { mediaSupports['facingMode'] && (
+              <button
+                className="btn btn-secondary"
+                onClick={switchCameras}
+                disabled={recording}
+              >
+                Switch Cameras
+              </button>
+            )}
             <button
               className="btn btn-secondary"
               onClick={stopRecording}
