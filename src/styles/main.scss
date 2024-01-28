@@ -6,6 +6,7 @@
 html,
 body {
   min-height: 100vh;
+  min-height: 100dvh;
   padding: 0;
 
   background-color: $bg-color;
@@ -14,6 +15,7 @@ body {
 .container {
   background-color: white;
   min-height: 100vh;
+  min-height: 100dvh;
   max-width: 900px;
 
   display: flex;
@@ -43,21 +45,21 @@ main {
   flex-direction: column;
 
   padding: 0 1rem;
-
-  h1 {
-    margin-bottom: 0.125rem;
-  }
 }
 
 footer {
-  padding: 0.5rem 1rem 1rem;
+  padding: 0.5rem 1rem;
   font-size: 0.625rem;
   color: #999;
 }
 
 .hero {
-  padding: 1rem 1rem;
+  padding: 0.5rem 1rem 0;
   color: $primary-color;
+
+  h1 {
+    margin-bottom: 0.125rem;
+  }
 
   p {
     margin-bottom: 0;
