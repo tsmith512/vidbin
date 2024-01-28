@@ -106,12 +106,11 @@ export const WebcamForm = (props: webcamFormProps) => {
       return;
     }
 
-    const filenameToSend = nameField.current?.value?.trim() || new Date().toDateString();
-    const fileToSend = new File([file], filenameToSend, { type: 'video/webm' });
+    const nameToSend = nameField.current?.value?.trim() || new Date().toDateString();
 
     props.uploadHandler({
-      name: filenameToSend,
-      file: fileToSend,
+      name: nameToSend,
+      file: file,
     });
   };
 
