@@ -66,7 +66,7 @@ export async function POST(request: NextRequest) {
     VALUES             (?,        ?,         ?,    ?,                  ?,          ?);
   `
   )
-    .bind(uid, uploadURL, name, date.toISOString(), 'reserved', scheduledDeletion)
+    .bind(uid, uploadURL, name, date.toISOString(), 'uploading', scheduledDeletion)
     .run();
 
   if (!success) {
