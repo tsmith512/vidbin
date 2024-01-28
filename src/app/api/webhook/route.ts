@@ -21,12 +21,13 @@ export async function POST(request: NextRequest) {
 
   let stateMessage: string;
 
-  // We're doing some simplification here for demo purposes. If a video is errored
+  // Doing some simplification here for demo purposes. If a video is errored
   // we'll get a code and reason why. But to simplify this prototype, mash that
   // into the status column so that VidBin will just have
-  // [pending, queued, encoding, ready, ...ERROR_CODES].
+  // [pending, queued, encoding, ready, error, ...err_codes] and all those codes
+  // just start with `ERR` anyway, so that makes for an easy check.
   if (data.status?.state === 'error') {
-    stateMessage = data.status?.errReasonCode ?? 'error';
+    stateMessage = data.status?.errReasonCode?.toLowerCase() ?? 'error';
   } else {
     stateMessage = data.status?.state ?? 'unknown';
   }

@@ -37,19 +37,15 @@ export default function ViewSingle({ params }: { params: { id: string } }) {
       setVideoInfo(data);
 
       console.log(data);
-      if (
-        data.status === 'ready' ||
-        data.status === 'error' ||
-        data.status.includes('ERR')
-      ) {
-        console.log('Video is ready, ending poll');
+      if (data.status === 'ready' || data.status.startsWith('err')) {
+        console.log(`Video is ${data.status}. Ending poll.`);
         setAreWePolling(false);
       }
     };
 
     const startPolling = () => {
       pollVideoInfo();
-      pollingRef.current = setInterval(pollVideoInfo, 5000);
+      pollingRef.current = setInterval(pollVideoInfo, 2000);
     };
 
     const stopPolling = () => {
@@ -91,12 +87,21 @@ export default function ViewSingle({ params }: { params: { id: string } }) {
   return (
     <>
       <h2>{videoInfo?.name ?? 'View a Video'}</h2>
-      {videoInfo?.status.match(/^ERR/i) && errored()}
+      {videoInfo?.status.startsWith('err') && errored()}
       {videoInfo?.status !== 'ready' && waiting()}
       {videoInfo?.status === 'ready' && (
-        <div className="player-container">
-          <Stream controls responsive={false} src={videoInfo.video_id} />
-        </div>
+        <>
+          <p className="player-share-info">
+            <i className="icon icon-link"></i>
+            Share:
+            <a href={`${window.location.origin}/${window.location.pathname}`}>
+              { window.location.hostname + window.location.pathname }
+            </a>
+          </p>
+          <div className="player-container">
+            <Stream controls responsive={false} src={videoInfo.video_id} />
+          </div>
+        </>
       )}
     </>
   );

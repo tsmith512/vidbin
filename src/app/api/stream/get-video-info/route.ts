@@ -40,11 +40,11 @@ export async function POST(request: NextRequest) {
     options
   );
 
-  const data = await response.json();
-
   if (!response.ok) {
     return new Response('error', { status: 500 });
   }
+
+  const data = await response.json();
 
   return new Response(
     JSON.stringify({

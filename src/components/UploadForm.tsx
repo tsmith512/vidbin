@@ -26,13 +26,11 @@ export const UploadForm = (props: uploadFormProps) => {
       return;
     }
 
-    const filenameToSend = nameField.current?.value?.trim() || new Date().toDateString();
+    const nameToSend = nameField.current?.value?.trim() || new Date().toDateString();
 
-    // We create a new File() here so that we can set the name of it to be what
-    // the user entered, instead of the name exposed by the filesystem.
     props.uploadHandler({
-      name: filenameToSend,
-      file: new File([targetFile], filenameToSend, { type: targetFile.type }),
+      name: nameToSend,
+      file: targetFile,
     });
   };
   return (
@@ -63,7 +61,12 @@ export const UploadForm = (props: uploadFormProps) => {
         />
       </div>
       <div className="form-group text-center">
-        <button disabled={fileField.current?.files?.item(0) === null} type="submit" name="submit" className="btn btn-primary">
+        <button
+          disabled={fileField.current?.files?.item(0) === null}
+          type="submit"
+          name="submit"
+          className="btn btn-primary"
+        >
           <i className="icon icon-upload"></i> Upload
         </button>
       </div>

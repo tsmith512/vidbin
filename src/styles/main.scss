@@ -6,6 +6,7 @@
 html,
 body {
   min-height: 100vh;
+  min-height: 100dvh;
   padding: 0;
 
   background-color: $bg-color;
@@ -14,6 +15,7 @@ body {
 .container {
   background-color: white;
   min-height: 100vh;
+  min-height: 100dvh;
   max-width: 900px;
 
   display: flex;
@@ -25,6 +27,9 @@ body {
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
 }
 
+header {
+
+}
 section,
 main {
   margin-bottom: 1rem;
@@ -43,21 +48,21 @@ main {
   flex-direction: column;
 
   padding: 0 1rem;
-
-  h1 {
-    margin-bottom: 0.125rem;
-  }
 }
 
 footer {
-  padding: 0.5rem 1rem 1rem;
+  padding: 0.5rem 1rem;
   font-size: 0.625rem;
   color: #999;
 }
 
 .hero {
-  padding: 1rem 1rem;
+  padding: 0.5rem 1rem 0;
   color: $primary-color;
+
+  h1 {
+    margin-bottom: 0.125rem;
+  }
 
   p {
     margin-bottom: 0;
@@ -78,9 +83,10 @@ footer {
   width: 100%;
   height: auto;
   white-space: normal;
+  font-size: 0.625rem;
 
   @media screen and (max-width: 420px) {
-    font-size: .625rem;
+    font-size: 0.5rem;
   }
 }
 
@@ -88,6 +94,15 @@ footer {
   margin: 0 auto;
   max-height: 50vh;
   max-width: 100%;
+}
+
+.player-share-info {
+  margin-bottom: 0.25rem;
+  font-size: 0.75rem;
+  font-style: italic;
+  i {
+    margin-right: 0.25rem;
+  }
 }
 
 .player-container,
@@ -112,6 +127,10 @@ footer {
 
 .upload-method-buttons {
   margin: 0 2rem 1rem;
+
+  .btn {
+    font-size: 0.875rem;
+  }
 
   @media screen and (max-width: 400px) {
     margin: 0 0rem 1rem;

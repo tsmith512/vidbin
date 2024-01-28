@@ -117,7 +117,7 @@ export default function Home() {
           className={inputSource === sources.file ? 'btn active' : 'btn'}
           id="fileSource"
           name="inputSource"
-          >
+        >
           Pick a File
         </button>
         <button
