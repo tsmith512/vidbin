@@ -68,8 +68,9 @@ export async function POST(request: NextRequest) {
 
   // In a production app, I probably wouldn't expose this, but for the demo, I
   // want to show what the "in-between" steps are between upload and ready.
+  // NB: Use the Stream Video ID (the long one) in this request, not our short #
   const upstreamResponse = await fetch(
-    `https://api.cloudflare.com/client/v4/accounts/${tag}/stream/${id}`,
+    `https://api.cloudflare.com/client/v4/accounts/${tag}/stream/${result.video_id}`,
     {
       method: 'GET',
       headers: {

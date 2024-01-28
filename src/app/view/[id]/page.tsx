@@ -48,7 +48,7 @@ export default function ViewSingle({ params }: { params: { id: string } }) {
 
     const startPolling = () => {
       pollVideoInfo();
-      pollingRef.current = setInterval(pollVideoInfo, 1000);
+      pollingRef.current = setInterval(pollVideoInfo, 2000);
     };
 
     const stopPolling = () => {
