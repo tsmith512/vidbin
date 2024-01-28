@@ -37,10 +37,7 @@ export default function ViewSingle({ params }: { params: { id: string } }) {
       setVideoInfo(data);
 
       console.log(data);
-      if (
-        data.status === 'ready' ||
-        data.status.startsWith('err')
-      ) {
+      if (data.status === 'ready' || data.status.startsWith('err')) {
         console.log(`Video is ${data.status}. Ending poll.`);
         setAreWePolling(false);
       }

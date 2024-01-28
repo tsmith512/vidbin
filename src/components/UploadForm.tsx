@@ -61,7 +61,12 @@ export const UploadForm = (props: uploadFormProps) => {
         />
       </div>
       <div className="form-group text-center">
-        <button disabled={fileField.current?.files?.item(0) === null} type="submit" name="submit" className="btn btn-primary">
+        <button
+          disabled={fileField.current?.files?.item(0) === null}
+          type="submit"
+          name="submit"
+          className="btn btn-primary"
+        >
           <i className="icon icon-upload"></i> Upload
         </button>
       </div>

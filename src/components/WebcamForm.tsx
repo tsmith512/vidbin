@@ -147,12 +147,24 @@ export const WebcamForm = (props: webcamFormProps) => {
             </button>
           </div>
           <div className="column col-6 col-md-8">
-            <video ref={webcamPreview} playsInline autoPlay muted loop className="video-preview" />
+            <video
+              ref={webcamPreview}
+              playsInline
+              autoPlay
+              muted
+              loop
+              className="video-preview"
+            />
           </div>
         </div>
       </div>
       <div className="form-group text-center">
-        <button disabled={file === null} type="submit" name="submit" className="btn btn-primary">
+        <button
+          disabled={file === null}
+          type="submit"
+          name="submit"
+          className="btn btn-primary"
+        >
           <i className="icon icon-upload"></i> Upload
         </button>
       </div>
