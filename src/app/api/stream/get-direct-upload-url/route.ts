@@ -6,6 +6,7 @@ export const runtime = 'edge';
 // origin application) because we don't want the public to get a Stream API key.
 const key = process.env.ACCOUNT_KEY;
 const tag = process.env.ACCOUNT_TAG;
+const creator = process.env?.CREATOR_ID;
 
 /**
  * Ask Stream to provison a direct creator upload URL for a basic file upload.
@@ -27,7 +28,7 @@ export async function POST(request: NextRequest) {
       Authorization: `Bearer ${key}`,
     },
     body: JSON.stringify({
-      creator: 'vidbin beta',
+      creator: creator ?? 'vidbin',
       maxDurationSeconds: 60 * 30,
       scheduledDeletion: deletionDate,
       meta: {
