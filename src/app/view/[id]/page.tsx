@@ -4,6 +4,7 @@ export const dynamic = 'force-static';
 export const runtime = 'edge';
 
 import { useState, useEffect, useRef } from 'react';
+import { usePathname } from 'next/navigation';
 
 import { Stream } from '@cloudflare/stream-react';
 
@@ -84,15 +85,25 @@ export default function ViewSingle({ params }: { params: { id: string } }) {
     </div>
   );
 
+  const shareUrl = (): string => {
+    return window.location.hostname + usePathname();
+  };
+
   return (
     <>
       <h2>{videoInfo?.name ?? 'View a Video'}</h2>
-      {videoInfo?.status.match(/^ERR/i) && errored()}
+      {videoInfo?.status.startsWith('err') && errored()}
       {videoInfo?.status !== 'ready' && waiting()}
       {videoInfo?.status === 'ready' && (
-        <div className="player-container">
-          <Stream controls responsive={false} src={videoInfo.video_id} />
-        </div>
+        <>
+          <p className="player-share-info">
+            <i className="icon icon-link"></i>
+            Share: <a href={`${window.location.origin}/${usePathname()}`}>{ shareUrl() }</a>
+          </p>
+          <div className="player-container">
+            <Stream controls responsive={false} src={videoInfo.video_id} />
+          </div>
+        </>
       )}
     </>
   );

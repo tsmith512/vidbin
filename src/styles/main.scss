@@ -92,6 +92,15 @@ footer {
   max-width: 100%;
 }
 
+.player-share-info {
+  margin-bottom: 0.25rem;
+  font-size: 0.75rem;
+  font-style: italic;
+  i {
+    margin-right: 0.25rem;
+  }
+}
+
 .player-container,
 .player-container > div {
   position: relative;
