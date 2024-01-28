@@ -39,17 +39,16 @@ export default function ViewSingle({ params }: { params: { id: string } }) {
       console.log(data);
       if (
         data.status === 'ready' ||
-        data.status === 'error' ||
-        data.status.includes('ERR')
+        data.status.startsWith('err')
       ) {
-        console.log('Video is ready, ending poll');
+        console.log(`Video is ${data.status}. Ending poll.`);
         setAreWePolling(false);
       }
     };
 
     const startPolling = () => {
       pollVideoInfo();
-      pollingRef.current = setInterval(pollVideoInfo, 5000);
+      pollingRef.current = setInterval(pollVideoInfo, 1000);
     };
 
     const stopPolling = () => {
