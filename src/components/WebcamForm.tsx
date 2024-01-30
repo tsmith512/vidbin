@@ -69,7 +69,7 @@ export const WebcamForm = (props: webcamFormProps) => {
     }
 
     setFacingMode((old) => {
-      return (old === 'user') ? 'environment' : 'user';
+      return old === 'user' ? 'environment' : 'user';
     });
   };
 
@@ -82,7 +82,7 @@ export const WebcamForm = (props: webcamFormProps) => {
 
     // We just had a facing mode change, setup the live preview again.
     setupLivePreview();
-  }, [facingMode])
+  }, [facingMode]);
 
   const stopRecording = (e: React.MouseEvent) => {
     e.preventDefault();
@@ -165,7 +165,7 @@ export const WebcamForm = (props: webcamFormProps) => {
             >
               Start Recording
             </button>
-            { mediaSupports['facingMode'] && (
+            {mediaSupports['facingMode'] && (
               <button
                 className="btn btn-secondary"
                 onClick={switchCameras}

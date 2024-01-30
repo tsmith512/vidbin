@@ -1,5 +1,10 @@
 # vidbin
 
+A simple proof-of-concept for a temporary, short-form video hosting platform
+powered by Cloudflare Stream, built on Cloudflare Pages, Workers, and D1.
+
+_This README needs... a lot of love. But I gotta finish my slides first._
+
 ## Functionality Demonstrated
 
 ## Architecture Overview
@@ -39,13 +44,13 @@ When on-demand videos are processed, Stream API can call a webhook.
 - It calls [this endpoint](./src/app/api/webhook/route.ts)
 - Setup:
   - PUT to https://api.cloudflare.com/client/v4/accounts/TAG/stream/webhook
-  - Body: `{"notificationUrl": "https://dev.vidbin.pages.dev/api/webhook"}`
+  - Body: `{"notificationUrl": "https://vidbin.tsmith.com/api/webhook"}`
   - Response:
     ```
       {
           "result": {
-              "notification_url": "https://dev.vidbin.pages.dev/api/webhook",
-              "notificationUrl": "https://dev.vidbin.pages.dev/api/webhook",
+              "notification_url": "https://vidbin.tsmith.com/api/webhook",
+              "notificationUrl": "https://vidbin.tsmith.com/api/webhook",
               "modified": "2024-01-23T04:45:33.324235Z",
               "secret": "REDACTED"
           },

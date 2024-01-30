@@ -93,9 +93,9 @@ export default function ViewSingle({ params }: { params: { id: string } }) {
         <>
           <p className="player-share-info">
             <i className="icon icon-link"></i>
-            Share:
+            Share: {' '}
             <a href={`${window.location.origin}/${window.location.pathname}`}>
-              { window.location.hostname + window.location.pathname }
+              {window.location.hostname + window.location.pathname}
             </a>
           </p>
           <div className="player-container">
