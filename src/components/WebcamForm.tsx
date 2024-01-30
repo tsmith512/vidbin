@@ -158,13 +158,6 @@ export const WebcamForm = (props: webcamFormProps) => {
       <div className="form-group">
         <div className="columns">
           <div className="column col-6 col-md-4 text-center video-buttons">
-            <button
-              className="btn btn-secondary"
-              onClick={startRecording}
-              disabled={recording}
-            >
-              Start Recording
-            </button>
             {mediaSupports['facingMode'] && (
               <button
                 className="btn btn-secondary"
@@ -174,6 +167,13 @@ export const WebcamForm = (props: webcamFormProps) => {
                 Switch Cameras
               </button>
             )}
+            <button
+              className="btn btn-secondary"
+              onClick={startRecording}
+              disabled={recording}
+            >
+              Start Recording
+            </button>
             <button
               className="btn btn-secondary"
               onClick={stopRecording}
